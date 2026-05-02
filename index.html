@@ -12,7 +12,8 @@
     <style>
         /* ─── Theme tokens ─── */
         /* ─── Theme tokens ─── */
-        :root {
+        :root,
+        [data-theme="light"] {
             --bg:       #F4F1EB;
             --surface:  #E6EDE6;
             --text:     #1A2E1A;
@@ -23,6 +24,19 @@
             --btn-text: #F4F1EB;
             --rule:     rgba(26,46,26,0.10);
             --nav-bg:   rgba(244,241,235,0.92);
+        }
+
+        [data-theme="dark"] {
+            --bg:       #0A0A0A;
+            --surface:  #141414;
+            --text:     #F0EDE8;
+            --muted:    #6B7280;
+            --dim:      rgba(240,237,232,0.55);
+            --accent:   #22C55E;
+            --primary:  #22C55E;
+            --btn-text: #0A0A0A;
+            --rule:     rgba(255,255,255,0.07);
+            --nav-bg:   rgba(10,10,10,0.90);
         }
 
         *,
@@ -126,6 +140,26 @@
             align-items: center;
             gap: 14px;
         }
+
+        /* ─── Theme Toggle Button ─── */
+        #theme-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            padding: 6px 14px;
+            border-radius: 100px;
+            cursor: pointer;
+            border: 1px solid var(--rule);
+            background: transparent;
+            color: var(--muted);
+            transition: all 0.3s ease;
+        }
+        #theme-btn:hover { color: var(--text); border-color: var(--accent); }
+        #theme-btn .theme-icon { font-size: 14px; line-height: 1; }
 
 
 
@@ -676,6 +710,10 @@
                 <a href="mailto:hello@inboundvision.com">Contact</a>
             </div>
             <div class="nav-actions">
+                <button id="theme-btn" type="button" aria-label="Toggle theme">
+                    <span class="theme-icon">◑</span>
+                    <span class="theme-label">Dark mode</span>
+                </button>
                 <a href="#pricing" class="btn-primary">Apply for pilot</a>
             </div>
             <button id="mobile-btn" type="button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">
@@ -986,6 +1024,30 @@
     </footer>
 
     <script>
+        // ─── Theme toggle ───
+        const html = document.documentElement;
+        const themeBtn = document.getElementById('theme-btn');
+        const themeLabel = themeBtn.querySelector('.theme-label');
+        const themeIcon = themeBtn.querySelector('.theme-icon');
+
+        function applyTheme(theme) {
+            html.setAttribute('data-theme', theme);
+            document.querySelector('meta[name="theme-color"]').content =
+                theme === 'dark' ? '#0A0A0A' : '#F4F1EB';
+            themeLabel.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
+            themeIcon.textContent  = theme === 'dark' ? '☀' : '◑';
+            localStorage.setItem('iv-theme', theme);
+        }
+
+        // Restore saved preference
+        const saved = localStorage.getItem('iv-theme');
+        if (saved) applyTheme(saved);
+
+        themeBtn.addEventListener('click', () => {
+            const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            applyTheme(next);
+        });
+
         // ─── Navbar border on scroll ───
         const nav = document.getElementById('nav');
         window.addEventListener('scroll', () => {
