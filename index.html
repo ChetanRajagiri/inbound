@@ -11,8 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
     <style>
         /* ─── Theme tokens ─── */
-        :root,
-        [data-theme="light"] {
+        /* ─── Theme tokens ─── */
+        :root {
             --bg:       #F4F1EB;
             --surface:  #E6EDE6;
             --text:     #1A2E1A;
@@ -23,27 +23,6 @@
             --btn-text: #F4F1EB;
             --rule:     rgba(26,46,26,0.10);
             --nav-bg:   rgba(244,241,235,0.92);
-            --card-bg:  #1A3D2B;
-            --card-fg:  rgba(244,241,235,0.55);
-            --card-label: rgba(244,241,235,0.42);
-            --stat-num: #D97706;
-        }
-
-        [data-theme="dark"] {
-            --bg:       #0A0A0A;
-            --surface:  #141414;
-            --text:     #F0EDE8;
-            --muted:    #6B7280;
-            --dim:      rgba(240,237,232,0.55);
-            --accent:   #22C55E;
-            --primary:  #22C55E;
-            --btn-text: #0A0A0A;
-            --rule:     rgba(255,255,255,0.07);
-            --nav-bg:   rgba(10,10,10,0.90);
-            --card-bg:  #111111;
-            --card-fg:  rgba(240,237,232,0.50);
-            --card-label: rgba(240,237,232,0.38);
-            --stat-num: #22C55E;
         }
 
         *,
@@ -148,25 +127,7 @@
             gap: 14px;
         }
 
-        /* ─── Theme Toggle Button ─── */
-        #theme-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 11px;
-            font-weight: 500;
-            letter-spacing: 0.04em;
-            padding: 6px 14px;
-            border-radius: 100px;
-            cursor: pointer;
-            border: 1px solid var(--rule);
-            background: transparent;
-            color: var(--muted);
-            transition: all 0.3s ease;
-        }
-        #theme-btn:hover { color: var(--text); border-color: var(--accent); }
-        #theme-btn .theme-icon { font-size: 14px; line-height: 1; }
+
 
         /* ─── Buttons ─── */
         .btn-primary {
@@ -507,6 +468,55 @@
             transition: color 0.3s ease;
         }
 
+        /* ─── Pillars ─── */
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .pillar-card {
+            background: #FAF8F4;
+            padding: 40px 32px;
+            border-top: 2px solid #B45309;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transition: transform 0.2s;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .pillar-icon {
+            color: #B45309;
+        }
+
+        .pillar-title {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #1C1917;
+            margin: 0;
+        }
+
+        .pillar-desc {
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        @media (max-width: 960px) {
+            .pillars-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+
         /* ─── Stats ─── */
         .stats-split {
             display: grid;
@@ -577,21 +587,7 @@
         .terms-label { font-size: 15px; font-weight: 600; color: var(--text); min-width: 180px; transition: color 0.3s ease; }
         .terms-value { font-size: 15px; color: var(--muted); line-height: 1.65; transition: color 0.3s ease; }
 
-        /* ─── Contact ─── */
-        .contact-block { margin-top: 48px; }
-        .contact-row {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 20px 0;
-            border-bottom: 1px solid var(--rule);
-            transition: border-color 0.3s ease;
-        }
-        .contact-row:first-child { border-top: 1px solid var(--rule); }
-        .contact-label { font-size: 12px; color: #6B84A8; letter-spacing: 0.08em; text-transform: uppercase; min-width: 80px; }
-        .contact-value { font-size: 15px; color: var(--text); transition: color 0.3s ease; }
-        .contact-value a { color: var(--accent); text-decoration: none; transition: opacity 0.2s, color 0.4s ease; }
-        .contact-value a:hover { opacity: 0.75; }
+
 
         /* ─── Footer ─── */
         footer {
@@ -674,17 +670,13 @@
         <div class="nav-inner">
             <a href="#hero" class="nav-logo">INBOUND VISION</a>
             <div class="nav-links">
+                <a href="#pillars">Features</a>
                 <a href="#how-it-works">How it works</a>
-                <a href="#revenue">Revenue model</a>
-                <a href="#tech">The tech</a>
-                <a href="#contact">Get in touch</a>
+                <a href="#pricing">Pilot program</a>
+                <a href="mailto:hello@inboundvision.com">Contact</a>
             </div>
             <div class="nav-actions">
-                <button id="theme-btn" type="button" aria-label="Toggle theme">
-                    <span class="theme-icon">◑</span>
-                    <span class="theme-label">Dark mode</span>
-                </button>
-                <a href="#contact" class="btn-primary">Express interest</a>
+                <a href="#pricing" class="btn-primary">Apply for pilot</a>
             </div>
             <button id="mobile-btn" type="button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">
                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
@@ -716,12 +708,12 @@
     <header id="hero">
         <div class="hero-inner">
             <div class="reveal">
-                <div class="section-label">Smart Court Technology</div>
-                <h1 class="hero-h1">Your court. Zero disputes.<br><span class="accent">₹90,000</span> more per year.</h1>
-                <p class="hero-sub">InBound Vision installs an AI line-calling system on your pickleball court at zero upfront cost. Players get instant In/Out calls. You earn more from every booking.</p>
+                <div class="section-label">Smart Court AI</div>
+                <h1 class="hero-h1">Your court's AI. Umpire. Coach. Creator.</h1>
+                <p class="hero-sub">InBound Vision installs an AI system on your pickleball court that calls every line, tracks every player, and turns every match into content — automatically.</p>
                 <div class="hero-actions">
                     <a href="#contact" class="btn-primary">Express interest</a>
-                    <a href="#how-it-works" class="btn-ghost">See how it works ↓</a>
+                    <a href="#pillars" class="btn-ghost">See the three features ↓</a>
                 </div>
                 <div class="hero-footnote">Pilot launching with select partner courts in Hyderabad &amp; Bangalore</div>
             </div>
@@ -730,29 +722,52 @@
 
     <!-- ─── CREDIBILITY BAR ─── -->
     <div class="cred-bar">
-        <span>80 FPS real-time tracking</span>
+        <span>80 FPS edge AI</span>
         <span class="cred-dot">·</span>
-        <span>Runs on NVIDIA Jetson edge hardware</span>
+        <span>Auto-generated match highlights</span>
         <span class="cred-dot">·</span>
-        <span>Trained on 10,000+ court images</span>
+        <span>Zero disputes guaranteed</span>
     </div>
 
-    <!-- ─── PROBLEM ─── -->
-    <section id="problem">
+    <!-- ─── PILLARS ─── -->
+    <section id="pillars">
         <div class="container-narrow">
             <div class="reveal">
-                <div class="section-label">The Problem</div>
-                <h2 style="font-size:clamp(32px,4vw,44px);">Line disputes are killing the game.</h2>
+                <div class="section-label">What InBound Vision does</div>
+                <h2 style="font-size:clamp(32px,4vw,44px);">One install. Three superpowers.</h2>
             </div>
-            <div class="reveal reveal-delay-1">
-                <div class="problem-list">
-                    <div class="problem-item">Arguments over close calls slow every session down and frustrate players.</div>
-                    <div class="problem-item">Without an official, there is no neutral arbiter — just two people disagreeing.</div>
-                    <div class="problem-item">Upset players don't rebook. Courts lose revenue, not just games.</div>
+            <div class="pillars-grid reveal reveal-delay-1">
+                <!-- Pillar 1: Umpire -->
+                <div class="pillar-card">
+                    <div class="pillar-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"></path><path d="m7 21 1.6-4.5c.1-.4.5-.5.9-.5h3.5c.8 0 1.5-.7 1.5-1.5V12c0-1.5-1.1-2.8-2.6-3L10 8.8l-1.3-.1c-1.3-.1-2.4-1-2.7-2.2l-.4-1.5c-.1-.5.3-1 .9-1H11c.8 0 1.5.7 1.5 1.5V6c0 1.1.9 2 2 2h3c1.7 0 3 1.3 3 3v2c0 1.1-.9 2-2 2h-1"></path></svg>
+                    </div>
+                    <h3 class="pillar-title">The Umpire</h3>
+                    <p class="pillar-desc">Real-time In/Out line calls at 80 FPS. Live scoring on a courtside display. Zero disputes, zero arguments.</p>
+                </div>
+
+                <!-- Pillar 2: Coach -->
+                <div class="pillar-card">
+                    <div class="pillar-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"></line><line x1="18" y1="20" x2="18" y2="4"></line><line x1="6" y1="20" x2="6" y2="16"></line></svg>
+                    </div>
+                    <h3 class="pillar-title">The Coach</h3>
+                    <p class="pillar-desc">Post-match analytics for every player. Shot patterns, rally stats, performance trends over time.</p>
+                </div>
+
+                <!-- Pillar 3: Creator -->
+                <div class="pillar-card">
+                    <div class="pillar-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+                    </div>
+                    <h3 class="pillar-title">The Creator</h3>
+                    <p class="pillar-desc">Auto-generated 60-second highlight reels after every match. Share directly to Instagram, WhatsApp, or stream live.</p>
                 </div>
             </div>
         </div>
     </section>
+
+
 
     <!-- ─── DEMO ─── -->
     <section id="demo" class="section-surface">
@@ -835,166 +850,72 @@
             </div>
             <div class="feat-table reveal reveal-delay-1">
                 <div class="feat-row">
-                    <div class="feat-name">80 frames per second</div>
-                    <div class="feat-desc">Every frame of live video is processed locally on an NVIDIA Jetson edge device. No footage leaves the court. No cloud subscription.</div>
+                    <div class="feat-name">Edge AI at 80 frames per second</div>
+                    <div class="feat-desc">All processing happens locally on an NVIDIA Jetson device. No cloud, no lag, no Wi-Fi dependency. Every line call is made in under 15 milliseconds.</div>
                 </div>
                 <div class="feat-row">
-                    <div class="feat-name">Works without internet</div>
-                    <div class="feat-desc">All AI inference runs on-device. A bad Wi-Fi day never affects a line call. The system works the moment it's powered on.</div>
+                    <div class="feat-name">Player tracking and analytics engine</div>
+                    <div class="feat-desc">Beyond the ball — the system tracks player positions, rally lengths, and shot placement to build a post-match performance picture for every player.</div>
                 </div>
                 <div class="feat-row">
-                    <div class="feat-name">Trained on real court data</div>
-                    <div class="feat-desc">The model is trained on pickleball-specific footage — not generic object detection. It understands what a bounce looks like on a compact court at speed.</div>
-                </div>
-                <div class="feat-row">
-                    <div class="feat-name">Automatic highlights</div>
-                    <div class="feat-desc">The system clips and stores rally highlights automatically. Players can review their best moments — a premium feature courts can offer as an add-on.</div>
+                    <div class="feat-name">Automatic highlight generation</div>
+                    <div class="feat-desc">The system identifies key moments — winners, long rallies, close calls — and stitches them into a shareable reel automatically. No editing required.</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ─── REVENUE ─── -->
-    <section id="revenue">
+    <!-- ─── PILOT PROGRAM ─── -->
+    <section id="pricing">
         <div class="container-narrow">
-            <div class="reveal">
-                <div class="section-label">Revenue Model</div>
-                <h2 style="font-size:clamp(32px,4vw,44px);">You earn from every Smart Court booking.</h2>
+            <div class="reveal" style="margin-bottom:48px;">
+                <div class="section-label">Pilot Program</div>
+                <h2 style="font-size:clamp(32px,4vw,44px);">Join the Smart Court pilot.</h2>
+                <p style="font-size:16px;color:var(--muted);margin-top:16px;line-height:1.75;">We're selecting 10 partner courts in Hyderabad and Bangalore to be the first to offer the Smart Court experience.</p>
             </div>
+            
             <div class="revenue-split reveal reveal-delay-1">
                 <div>
                     <div class="revenue-table">
                         <div class="revenue-row">
                             <span class="revenue-label">Standard court rate</span>
-                            <span class="revenue-value">&#x20B9;1,000 / hour</span>
+                            <span class="revenue-value">&#x20B9;1,000 / hr</span>
                         </div>
                         <div class="revenue-row">
                             <span class="revenue-label">Smart Court upcharge</span>
-                            <span class="revenue-value accent">+&#x20B9;100 / hour</span>
+                            <span class="revenue-value" style="color:var(--accent);">+&#x20B9;100 / hr</span>
                         </div>
                         <div class="revenue-row">
                             <span class="revenue-label">Your share (pilot)</span>
-                            <span class="revenue-value success">&#x20B9;30 / hour</span>
+                            <span class="revenue-value" style="color:var(--success);">&#x20B9;30 / hr</span>
                         </div>
                     </div>
-                    <p class="revenue-note">At 10 hours/day, 300 days/year — that's <strong>&#x20B9;90,000 additional revenue</strong> per court during the pilot period.</p>
-                    <p class="revenue-sub">Post-pilot revenue share is renegotiated based on performance. Courts that launch early lock in the most favourable long-term terms.</p>
+                    <p class="revenue-note">At 10 hours/day, 300 days/year — that's <strong>&#x20B9;90,000 additional revenue</strong> per court during the pilot.</p>
                 </div>
-                <div class="zero-card">
-                    <div class="zero-num">&#x20B9;0</div>
-                    <div class="zero-label">Upfront cost to you</div>
-                    <div class="zero-sub">We install, maintain, and operate the system. You just collect the upside.</div>
+                <div style="background:var(--primary); color:var(--btn-text); border-radius:8px; padding:40px 32px; text-align:center;">
+                    <div style="font-family:'DM Serif Display',serif; font-size:64px; color:var(--accent); line-height:1;">&#x20B9;0</div>
+                    <div style="font-size:15px; margin-top:12px; font-weight:600; opacity:0.8;">Upfront cost to you</div>
+                    <p style="margin-top:24px; padding-top:24px; border-top:1px solid rgba(255,255,255,0.1); font-size:13px; opacity:0.7; line-height:1.7;">We supply, install, and maintain all hardware. No hidden fees, no subscription. Just collect the upside.</p>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- ─── SOCIAL PROOF ─── -->
-    <section id="social-proof" class="section-surface">
-        <div class="container-narrow">
-            <div class="reveal">
-                <div class="section-label">Player Demand</div>
-                <h2 style="font-size:clamp(32px,4vw,44px);">Players are already asking for this.</h2>
-            </div>
-            <div class="stats-split reveal reveal-delay-1">
-                <div>
-                    <div class="stats-grid">
-                        <div>
-                            <div class="stat-num">71%</div>
-                            <div class="stat-label">face disputes every match</div>
-                        </div>
-                        <div>
-                            <div class="stat-num">92%</div>
-                            <div class="stat-label">willing to pay more for AI calling</div>
-                        </div>
-                        <div>
-                            <div class="stat-num">50%</div>
-                            <div class="stat-label">would switch to a Smart Court</div>
-                        </div>
-                        <div>
-                            <div class="stat-num">81%</div>
-                            <div class="stat-label">want automated match highlights</div>
-                        </div>
+            <div class="reveal" style="margin-top:64px;">
+                <div class="terms-table">
+                    <div class="terms-row">
+                        <span class="terms-label">Support</span>
+                        <span class="terms-value">24/7 technical monitoring and on-site hardware maintenance included.</span>
                     </div>
-                    <p class="stat-source">Player survey, n=180 · Hyderabad &amp; Bangalore, Jan 2026</p>
-                </div>
-                <div class="pilot-callout">
-                    <div style="font-size:20px;font-weight:700;color:var(--text);margin-bottom:16px;line-height:1.3;transition:color 0.3s ease;">Pilot spots are limited</div>
-                    <div class="pilot-badge">10 courts · Hyderabad &amp; Bangalore</div>
-                    <p style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:28px;transition:color 0.3s ease;">We're selecting pilot partners who want to be first to offer a Smart Court experience in their city.</p>
-                    <a href="#contact" class="btn-primary" style="font-size:15px;padding:14px 24px;display:block;text-align:center;">Express interest</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ─── NEXT STEPS ─── -->
-    <section id="next-steps">
-        <div class="container-narrow">
-            <div class="reveal">
-                <div class="section-label">The Process</div>
-                <h2 style="font-size:clamp(32px,4vw,44px);">From conversation to earning in 7 days.</h2>
-            </div>
-            <div class="steps-list reveal reveal-delay-1">
-                <div class="step-row">
-                    <div class="step-num">01</div>
-                    <div class="step-body">
-                        <div class="step-title">Express interest</div>
-                        <div class="step-desc">Reach out via the contact below. We'll schedule a brief call to discuss your court and answer any questions.</div>
+                    <div class="terms-row">
+                        <span class="terms-label">Duration</span>
+                        <span class="terms-value">3-month initial pilot period with priority for long-term licensing.</span>
                     </div>
-                    <div class="step-tag">Takes 2 minutes</div>
-                </div>
-                <div class="step-row">
-                    <div class="step-num">02</div>
-                    <div class="step-body">
-                        <div class="step-title">We install the system</div>
-                        <div class="step-desc">Our team visits your court and installs two cameras and the edge AI unit. Under one hour, zero disruption to your schedule.</div>
+                    <div class="terms-row">
+                        <span class="terms-label">Availability</span>
+                        <span class="terms-value">Accepting applications from courts in Hyderabad and Bangalore only.</span>
                     </div>
-                    <div class="step-tag">One hour install</div>
                 </div>
-                <div class="step-row">
-                    <div class="step-num">03</div>
-                    <div class="step-body">
-                        <div class="step-title">You start earning</div>
-                        <div class="step-desc">Go live immediately. Offer the Smart Court experience to your players and collect your share of every ₹100 upcharge from day one.</div>
-                    </div>
-                    <div class="step-tag">Day one revenue</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ─── PILOT TERMS ─── -->
-    <section id="pricing" class="section-surface">
-        <div class="container-narrow">
-            <div class="reveal" style="margin-bottom:48px;">
-                <div class="section-label">Pilot Terms</div>
-                <h2 style="font-size:clamp(32px,4vw,44px);">What you get as a pilot partner.</h2>
-            </div>
-            <div class="terms-table reveal reveal-delay-1">
-                <div class="terms-row">
-                    <span class="terms-label">Hardware cost</span>
-                    <span class="terms-value">Zero. InBound Vision supplies and installs all equipment at no charge during the pilot.</span>
-                </div>
-                <div class="terms-row">
-                    <span class="terms-label">Maintenance</span>
-                    <span class="terms-value">Fully managed by InBound Vision. Software updates, hardware support, and on-site visits included.</span>
-                </div>
-                <div class="terms-row">
-                    <span class="terms-label">Court upcharge</span>
-                    <span class="terms-value">&#x20B9;100 per Smart Court booking hour, split between the platform and the court partner.</span>
-                </div>
-                <div class="terms-row">
-                    <span class="terms-label">Your share</span>
-                    <span class="terms-value">&#x20B9;30 per hour during the pilot period — &#x20B9;90,000/year at standard utilisation.</span>
-                </div>
-                <div class="terms-row">
-                    <span class="terms-label">Pilot duration</span>
-                    <span class="terms-value">3 months, after which terms are renegotiated based on results. Early partners get priority on long-term agreements.</span>
-                </div>
-                <div class="terms-row">
-                    <span class="terms-label">Coverage</span>
-                    <span class="terms-value">Currently accepting applications from courts in Hyderabad and Bangalore.</span>
+                <div style="margin-top:40px; text-align:center;">
+                    <a href="mailto:hello@inboundvision.com?subject=Pilot%20Application" class="btn-primary" style="font-size:15px; padding:14px 28px;">Apply for pilot spot</a>
                 </div>
             </div>
         </div>
@@ -1037,15 +958,15 @@
         <div class="footer-inner">
             <div>
                 <a href="#hero" class="footer-logo">INBOUND VISION</a>
-                <p class="footer-tagline">AI court intelligence for modern racket sports.</p>
-                <p class="footer-tagline" style="margin-top:10px;font-style:italic;">Built in Hyderabad by a team that plays pickleball.</p>
+                <p class="footer-tagline">The smart court OS for the generation that films everything.</p>
+                <p class="footer-tagline" style="margin-top:10px;font-style:italic;">Built in Hyderabad. Designed for every recreational court in India.</p>
             </div>
             <div class="footer-col">
                 <h4>Product</h4>
                 <ul>
                     <li><a href="#how-it-works">Line Calling</a></li>
                     <li><a href="#tech">Highlights</a></li>
-                    <li><a href="#revenue">Revenue Model</a></li>
+                    <li><a href="#pricing">Pilot Program</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -1065,30 +986,6 @@
     </footer>
 
     <script>
-        // ─── Theme toggle ───
-        const html = document.documentElement;
-        const themeBtn = document.getElementById('theme-btn');
-        const themeLabel = themeBtn.querySelector('.theme-label');
-        const themeIcon = themeBtn.querySelector('.theme-icon');
-
-        function applyTheme(theme) {
-            html.setAttribute('data-theme', theme);
-            document.querySelector('meta[name="theme-color"]').content =
-                theme === 'dark' ? '#0A0A0A' : '#F4F1EB';
-            themeLabel.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
-            themeIcon.textContent  = theme === 'dark' ? '☀' : '◑';
-            localStorage.setItem('iv-theme', theme);
-        }
-
-        // Restore saved preference
-        const saved = localStorage.getItem('iv-theme');
-        if (saved) applyTheme(saved);
-
-        themeBtn.addEventListener('click', () => {
-            const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            applyTheme(next);
-        });
-
         // ─── Navbar border on scroll ───
         const nav = document.getElementById('nav');
         window.addEventListener('scroll', () => {
