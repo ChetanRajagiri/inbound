@@ -1,50 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="theme-color" content="#FAF8F4">
+    <meta name="theme-color" content="#F4F1EB">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inbound Vision — AI Court Intelligence</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --ink: #FAF8F4;
-            --paper: #1C1917;
-            --muted: #78716C;
-            --dim: rgba(120,100,60,0.3);
-            --rule: rgba(120,100,60,0.12);
-            --surface: #F0EBE1;
-            --accent: #B45309;
-            --success: #16A34A;
+        /* ─── Theme tokens ─── */
+        :root,
+        [data-theme="light"] {
+            --bg:       #F4F1EB;
+            --surface:  #E6EDE6;
+            --text:     #1A2E1A;
+            --muted:    #5C6E5C;
+            --dim:      #4A5E4A;
+            --accent:   #D97706;
+            --primary:  #1A3D2B;
+            --btn-text: #F4F1EB;
+            --rule:     rgba(26,46,26,0.10);
+            --nav-bg:   rgba(244,241,235,0.92);
+            --card-bg:  #1A3D2B;
+            --card-fg:  rgba(244,241,235,0.55);
+            --card-label: rgba(244,241,235,0.42);
+            --stat-num: #D97706;
+        }
+
+        [data-theme="dark"] {
+            --bg:       #0A0A0A;
+            --surface:  #141414;
+            --text:     #F0EDE8;
+            --muted:    #6B7280;
+            --dim:      rgba(240,237,232,0.55);
+            --accent:   #22C55E;
+            --primary:  #22C55E;
+            --btn-text: #0A0A0A;
+            --rule:     rgba(255,255,255,0.07);
+            --nav-bg:   rgba(10,10,10,0.90);
+            --card-bg:  #111111;
+            --card-fg:  rgba(240,237,232,0.50);
+            --card-label: rgba(240,237,232,0.38);
+            --stat-num: #22C55E;
         }
 
         *,
         *::before,
-        *::after {
-            box-sizing: border-box;
-        }
+        *::after { box-sizing: border-box; }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             margin: 0;
-            background: var(--ink);
-            color: #1C1917;
+            background: var(--bg);
+            color: var(--text);
             font-family: 'DM Sans', sans-serif;
             font-size: 16px;
             line-height: 1.75;
             -webkit-font-smoothing: antialiased;
+            transition: background 0.4s ease, color 0.3s ease;
         }
 
-        h1,
-        h2 {
+        h1, h2 {
             font-family: 'DM Serif Display', Georgia, serif;
             font-weight: 400;
             line-height: 1.1;
@@ -52,8 +71,7 @@
             margin: 0;
         }
 
-        h3,
-        h4 {
+        h3, h4 {
             font-family: 'DM Sans', sans-serif;
             font-weight: 700;
             line-height: 1.2;
@@ -61,16 +79,9 @@
             margin: 0;
         }
 
-        p {
-            margin: 0;
-        }
+        p { margin: 0; }
 
-        button,
-        input,
-        textarea,
-        select {
-            font: inherit;
-        }
+        button, input, textarea, select { font: inherit; }
 
         /* ─── Reveal on scroll ─── */
         .reveal {
@@ -78,43 +89,25 @@
             transform: translateY(16px);
             transition: opacity 0.7s ease, transform 0.7s ease;
         }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: none;
-        }
-
-        .reveal-delay-1 {
-            transition-delay: 0.1s;
-        }
-
-        .reveal-delay-2 {
-            transition-delay: 0.2s;
-        }
-
-        .reveal-delay-3 {
-            transition-delay: 0.3s;
-        }
+        .reveal.visible { opacity: 1; transform: none; }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
 
         /* ─── Navbar ─── */
         #nav {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             z-index: 100;
             height: 64px;
             display: flex;
             align-items: center;
-            background: rgba(250,248,244,0.92);
+            background: var(--nav-bg);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid transparent;
-            transition: border-color 0.3s ease;
+            transition: border-color 0.3s ease, background 0.4s ease;
         }
-
-        #nav.scrolled {
-            border-bottom-color: var(--rule);
-        }
+        #nav.scrolled { border-bottom-color: var(--rule); }
 
         .nav-inner {
             width: 100%;
@@ -131,8 +124,9 @@
             font-weight: 700;
             font-size: 15px;
             letter-spacing: 0.1em;
-            color: #1C1917;
+            color: var(--text);
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         .nav-links {
@@ -140,35 +134,41 @@
             align-items: center;
             gap: 36px;
         }
-
         .nav-links a {
             font-size: 13px;
             color: var(--muted);
             text-decoration: none;
             transition: color 0.2s;
         }
-
-        .nav-links a:hover {
-            color: #1C1917;
-        }
+        .nav-links a:hover { color: var(--text); }
 
         .nav-actions {
             display: flex;
             align-items: center;
-            gap: 24px;
+            gap: 14px;
         }
 
-        .nav-demo {
-            font-size: 13px;
+        /* ─── Theme Toggle Button ─── */
+        #theme-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            padding: 6px 14px;
+            border-radius: 100px;
+            cursor: pointer;
+            border: 1px solid var(--rule);
+            background: transparent;
             color: var(--muted);
-            text-decoration: none;
-            transition: color 0.2s;
+            transition: all 0.3s ease;
         }
+        #theme-btn:hover { color: var(--text); border-color: var(--accent); }
+        #theme-btn .theme-icon { font-size: 14px; line-height: 1; }
 
-        .nav-demo:hover {
-            color: #1C1917;
-        }
-
+        /* ─── Buttons ─── */
         .btn-primary {
             display: inline-flex;
             align-items: center;
@@ -176,19 +176,16 @@
             font-family: 'DM Sans', sans-serif;
             font-size: 13px;
             font-weight: 500;
-            background: #1C1917;
-            color: #FAF8F4;
+            background: var(--primary);
+            color: var(--btn-text);
             padding: 9px 20px;
             border-radius: 3px;
             text-decoration: none;
             border: none;
             cursor: pointer;
-            transition: opacity 0.2s;
+            transition: opacity 0.2s, background 0.4s ease, color 0.3s ease;
         }
-
-        .btn-primary:hover {
-            opacity: 0.88;
-        }
+        .btn-primary:hover { opacity: 0.88; }
 
         .btn-ghost {
             display: inline-flex;
@@ -202,15 +199,11 @@
             padding: 9px 20px;
             border-radius: 3px;
             text-decoration: none;
-            border:  1px solid rgba(100,140,200,0.2);
+            border: 1px solid var(--rule);
             cursor: pointer;
             transition: color 0.2s, border-color 0.2s;
         }
-
-        .btn-ghost:hover {
-            color: #1C1917;
-            border-color: #B45309;
-        }
+        .btn-ghost:hover { color: var(--text); border-color: var(--accent); }
 
         /* ─── Mobile nav ─── */
         #mobile-btn {
@@ -226,16 +219,13 @@
             position: fixed;
             inset: 0;
             z-index: 99;
-            background: var(--ink);
+            background: var(--bg);
             flex-direction: column;
             padding: 88px 32px 40px;
             gap: 32px;
+            transition: background 0.4s ease;
         }
-
-        #mobile-menu.open {
-            display: flex;
-        }
-
+        #mobile-menu.open { display: flex; }
         #mobile-menu a {
             font-family: 'DM Sans', sans-serif;
             font-size: 28px;
@@ -244,49 +234,33 @@
             text-decoration: none;
             transition: color 0.2s;
         }
-
-        #mobile-menu a:hover {
-            color: #1C1917;
-        }
-
+        #mobile-menu a:hover { color: var(--text); }
         #mobile-close {
             position: absolute;
-            top: 20px;
-            right: 28px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
+            top: 20px; right: 28px;
+            background: none; border: none;
+            cursor: pointer; padding: 4px;
         }
 
         /* ─── Section rhythm ─── */
-        section {
-            padding: 120px 32px;
-        }
+        section { padding: 120px 32px; }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .container-narrow {
-            max-width: 800px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .container-narrow { max-width: 800px; margin: 0 auto; }
 
         .section-label {
             font-size: 11px;
             font-family: 'DM Sans', sans-serif;
             letter-spacing: 0.18em;
             text-transform: uppercase;
-            color: #78716C;
+            color: var(--muted);
             margin-bottom: 20px;
+            transition: color 0.3s ease;
         }
 
         /* ─── Hero ─── */
         #hero {
             position: relative;
-            overflow: hidden;
             isolation: isolate;
             min-height: 100vh;
             display: flex;
@@ -296,7 +270,9 @@
             padding-left: 32px;
             padding-right: 32px;
             border-bottom: 1px solid var(--rule);
+            transition: border-color 0.3s ease;
         }
+
         .hero-inner {
             max-width: 800px;
             margin: 0 auto;
@@ -304,20 +280,24 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            gap: 0;
         }
 
         .hero-h1 {
             font-size: clamp(44px, 5vw, 68px);
             margin-bottom: 20px;
+            color: var(--text);
+            transition: color 0.3s ease;
         }
+
+        .hero-h1 .accent { color: var(--accent); transition: color 0.4s ease; }
 
         .hero-sub {
             font-size: 16px;
-            color: var(--muted);
+            color: var(--dim);
             line-height: 1.8;
-            max-width: 380px;
+            max-width: 420px;
             margin-bottom: 36px;
+            transition: color 0.3s ease;
         }
 
         .hero-actions {
@@ -329,66 +309,60 @@
 
         .hero-footnote {
             font-size: 12px;
-            color: #78716C;
+            color: var(--muted);
             letter-spacing: 0.02em;
+            transition: color 0.3s ease;
         }
 
-        /* Hero visual CSS kept for potential reuse but card is not in DOM */
-        .court-card {
+        /* ─── Credibility bar ─── */
+        .cred-bar {
+            text-align: center;
+            padding: 20px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 12px;
+            color: var(--muted);
+            border-bottom: 1px solid var(--rule);
             background: var(--surface);
-            border: 1px solid var(--rule);
-            border-radius: 6px;
-            overflow: hidden;
-        }
-
-        .call-sub {
-            background: rgba(250,248,244,0.9);
-            color: #1C1917;
-            font-family: 'DM Mono', monospace;
-            font-size: 11px;
-            padding: 6px 14px;
-            border-radius: 100px;
-            border: 1px solid rgba(22, 163, 74, 0.4);
             letter-spacing: 0.05em;
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px 24px;
+            transition: background 0.4s ease, border-color 0.3s ease;
+        }
+        .cred-dot { color: var(--rule); }
+
+        /* ─── Problem ─── */
+        .problem-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            counter-reset: problem-counter;
+            margin-top: 48px;
+        }
+        .problem-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            font-size: 18px;
+            color: var(--text);
+            line-height: 1.5;
+            transition: color 0.3s ease;
+        }
+        .problem-item::before {
+            counter-increment: problem-counter;
+            content: counter(problem-counter) ".";
+            color: var(--accent);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            flex-shrink: 0;
+            transition: color 0.4s ease;
         }
 
-        @keyframes blink {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.2;
-            }
-        }
-
-        .court-metric {
-            font-family: 'DM Mono', 'Courier New', monospace;
-            font-size: 10px;
-            color: #6B84A8;
-            letter-spacing: 0.06em;
-        }
-
-        .court-metric span {
-            color: #1C1917;
-        }
-
-        /* ─── Rule dividers ─── */
-        .rule {
-            border: none;
-            border-top: 1px solid var(--rule);
-            margin: 0;
-        }
-
-        /* ─── How it works ─── */
-        .steps-list {
-            margin-top: 56px;
-        }
-
+        /* ─── Steps ─── */
+        .steps-list { margin-top: 56px; }
         .step-row {
             display: flex;
             align-items: flex-start;
@@ -396,41 +370,35 @@
             padding: 32px 0;
             border-bottom: 1px solid var(--rule);
             gap: 24px;
+            transition: border-color 0.3s ease;
         }
-
-        .step-row:first-child {
-            border-top: 1px solid var(--rule);
-        }
-
+        .step-row:first-child { border-top: 1px solid var(--rule); }
         .step-num {
             font-family: 'DM Sans', sans-serif;
             font-size: 48px;
             font-weight: 700;
-            color: rgba(120,100,60,0.15);
+            color: var(--rule);
             min-width: 64px;
             line-height: 1;
             user-select: none;
             padding-top: 2px;
+            transition: color 0.3s ease;
         }
-
-        .step-body {
-            flex: 1;
-        }
-
+        .step-body { flex: 1; }
         .step-title {
             font-family: 'DM Sans', sans-serif;
             font-size: 16px;
             font-weight: 600;
-            color: #1C1917;
+            color: var(--text);
             margin-bottom: 4px;
+            transition: color 0.3s ease;
         }
-
         .step-desc {
             font-size: 15px;
             color: var(--muted);
             line-height: 1.75;
+            transition: color 0.3s ease;
         }
-
         .step-tag {
             font-size: 11px;
             color: #6B84A8;
@@ -439,60 +407,28 @@
             border-radius: 2px;
             white-space: nowrap;
             letter-spacing: 0.04em;
+            transition: border-color 0.3s ease;
         }
 
         /* ─── Demo ─── */
-        .demo-video {
-            margin-top: 56px;
-            aspect-ratio: 16 / 9;
-            background: var(--paper);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--ink);
-            font-size: 13px;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
+        .demo-video-wrap {
+            margin-top: 40px;
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            background: #111E35;
+            border-radius: 8px;
         }
-
         .demo-caption {
             margin-top: 16px;
             text-align: center;
             font-size: 13px;
             color: var(--muted);
+            transition: color 0.3s ease;
         }
 
-        /* ─── Features ─── */
-        .feature-priority {
-            margin-top: 32px;
-        }
-
-        .feature-priority p {
-            font-size: 15px;
-            color: #1C1917;
-            margin-bottom: 16px;
-        }
-
-        .feature-priority-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .feature-priority-list span {
-            font-size: 11px;
-            color: #6B84A8;
-            border: 1px solid var(--rule);
-            padding: 4px 12px;
-            border-radius: 2px;
-            letter-spacing: 0.04em;
-        }
-
-        .feat-table {
-            margin-top: 56px;
-        }
-
+        /* ─── Features table ─── */
+        .feat-table { margin-top: 56px; }
         .feat-row {
             display: grid;
             grid-template-columns: 1fr 1.6fr;
@@ -500,138 +436,169 @@
             align-items: start;
             padding: 28px 0;
             border-bottom: 1px solid var(--rule);
-            transition: background 0.2s;
+            transition: border-color 0.3s ease;
         }
-
-        .feat-row:first-child {
-            border-top: 1px solid var(--rule);
-        }
-
-        .feat-row:hover {
-            background: rgba(255, 255, 255, 0.03);
-        }
-
+        .feat-row:first-child { border-top: 1px solid var(--rule); }
         .feat-name {
-            font-family: 'DM Sans', sans-serif;
             font-size: 15px;
             font-weight: 500;
-            color: #1C1917;
+            color: var(--text);
             padding-top: 2px;
+            transition: color 0.3s ease;
         }
-
         .feat-desc {
             font-size: 15px;
             color: var(--muted);
             line-height: 1.75;
+            transition: color 0.3s ease;
         }
 
-        .hardware-note {
-            margin-top: 32px;
-            font-size: 16px;
-            color: #1C1917;
-            line-height: 1.75;
-        }
+        /* ─── Surface sections ─── */
+        .section-surface { background: var(--surface); transition: background 0.4s ease; }
 
-        /* ─── Pilot CTA button ─── */
-        .price-card {
-            background: var(--surface);
-            padding: 40px 36px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .price-features {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .price-cta {
-            display: block;
-            text-align: center;
-            font-size: 13px;
-            font-weight: 500;
-            padding: 11px 20px;
-            border-radius: 3px;
-            text-decoration: none;
-            transition: opacity 0.2s, background 0.2s, color 0.2s;
-        }
-
-        .price-cta-primary {
-            background: #1C1917;
-            color: #FAF8F4;
-        }
-
-        .price-cta-primary:hover { opacity: 0.88; }
-
-        .apply-form {
+        /* ─── Revenue ─── */
+        .revenue-split {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 56px;
             margin-top: 48px;
+            align-items: start;
+        }
+        .revenue-table { border-top: 1px solid var(--rule); transition: border-color 0.3s ease; }
+        .revenue-row {
             display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .apply-form input {
-            width: 100%;
-            border: none;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 20px 0;
             border-bottom: 1px solid var(--rule);
-            border-radius: 0;
-            background: transparent;
-            padding: 12px 0;
-            font-size: 15px;
-            font-family: 'DM Sans', sans-serif;
-            color: #1C1917;
-            outline: none;
-            transition: border-color 0.2s;
+            transition: border-color 0.3s ease;
+        }
+        .revenue-label { font-size: 15px; color: var(--muted); transition: color 0.3s ease; }
+        .revenue-value { font-size: 16px; font-weight: 700; color: var(--text); font-family: 'DM Sans', sans-serif; transition: color 0.3s ease; }
+        .revenue-value.accent { color: var(--accent); transition: color 0.4s ease; }
+        .revenue-value.success { color: #16A34A; }
+        .revenue-note { margin-top: 20px; font-size: 14px; color: var(--muted); line-height: 1.75; transition: color 0.3s ease; }
+        .revenue-sub { margin-top: 12px; font-size: 13px; color: #6B84A8; line-height: 1.75; }
+
+        .zero-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 48px 36px;
+            text-align: center;
+            border: 1px solid var(--rule);
+            transition: background 0.4s ease, border-color 0.3s ease;
+        }
+        .zero-num {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 72px;
+            font-weight: 400;
+            color: var(--accent);
+            line-height: 1;
+            transition: color 0.4s ease;
+        }
+        .zero-label { font-size: 15px; color: var(--card-fg); margin-top: 12px; font-weight: 500; transition: color 0.3s ease; }
+        .zero-sub {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            font-size: 13px;
+            color: var(--card-label);
+            line-height: 1.7;
+            transition: color 0.3s ease;
         }
 
-        .apply-form input:focus {
-            border-bottom-color: #B45309;
+        /* ─── Stats ─── */
+        .stats-split {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 48px;
+            margin-top: 48px;
+            align-items: center;
         }
-
-        .apply-btn {
-            background: #1C1917;
-            color: #FAF8F4;
-            border: none;
-            padding: 16px 24px;
-            font-size: 15px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: opacity 0.2s;
-            margin-top: 12px;
-            font-family: 'DM Sans', sans-serif;
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
         }
-
-        .apply-btn:hover {
-            opacity: 0.9;
+        .stat-num {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 48px;
+            font-weight: 400;
+            color: var(--stat-num);
+            line-height: 1.1;
+            transition: color 0.4s ease;
         }
+        .stat-label { font-size: 14px; color: var(--muted); margin-top: 6px; max-width: 150px; line-height: 1.5; transition: color 0.3s ease; }
+        .stat-source { font-size: 11px; color: var(--rule); letter-spacing: 0.04em; margin-top: 24px; line-height: 1.6; transition: color 0.3s ease; }
 
-        /* ─── Problem & Solution ─── */
-        .problem-split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-        .problem-list { display: flex; flex-direction: column; gap: 24px; counter-reset: problem-counter; }
-        .problem-item { display: flex; align-items: flex-start; gap: 16px; font-size: 18px; color: #1C1917; line-height: 1.5; }
-        .problem-item::before {
-            counter-increment: problem-counter;
-            content: counter(problem-counter) ".";
+        /* ─── Pilot callout card ─── */
+        .pilot-callout {
+            padding: 40px 32px;
+            border: 1px solid rgba(180,83,9,0.2);
+            border-radius: 6px;
+            text-align: center;
+            background: var(--bg);
+            transition: background 0.4s ease, border-color 0.3s ease;
+        }
+        [data-theme="dark"] .pilot-callout {
+            border-color: rgba(34,197,94,0.2);
+            background: var(--surface);
+        }
+        .pilot-badge {
+            display: inline-block;
+            background: rgba(180,83,9,0.08);
+            border: 1px solid rgba(180,83,9,0.25);
             color: #B45309;
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 700;
-            font-size: 18px;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 100px;
+            margin-bottom: 28px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        [data-theme="dark"] .pilot-badge {
+            background: rgba(34,197,94,0.08);
+            border-color: rgba(34,197,94,0.25);
+            color: #22C55E;
         }
 
-        /* ─── Social Proof stats ─── */
-        .stats-split { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; margin-top: 48px; align-items: center; }
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+        /* ─── Pilot terms table ─── */
+        .terms-table { border-top: 1px solid var(--rule); max-width: 600px; margin-top: 0; }
+        .terms-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--rule);
+            gap: 24px;
+            transition: border-color 0.3s ease;
+        }
+        .terms-label { font-size: 15px; font-weight: 600; color: var(--text); min-width: 180px; transition: color 0.3s ease; }
+        .terms-value { font-size: 15px; color: var(--muted); line-height: 1.65; transition: color 0.3s ease; }
+
+        /* ─── Contact ─── */
+        .contact-block { margin-top: 48px; }
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--rule);
+            transition: border-color 0.3s ease;
+        }
+        .contact-row:first-child { border-top: 1px solid var(--rule); }
+        .contact-label { font-size: 12px; color: #6B84A8; letter-spacing: 0.08em; text-transform: uppercase; min-width: 80px; }
+        .contact-value { font-size: 15px; color: var(--text); transition: color 0.3s ease; }
+        .contact-value a { color: var(--accent); text-decoration: none; transition: opacity 0.2s, color 0.4s ease; }
+        .contact-value a:hover { opacity: 0.75; }
 
         /* ─── Footer ─── */
         footer {
             padding: 64px 32px;
             border-top: 1px solid var(--rule);
+            transition: border-color 0.3s ease;
         }
-
         .footer-inner {
             max-width: 800px;
             margin: 0 auto;
@@ -639,25 +606,18 @@
             grid-template-columns: 1.8fr 1fr 1fr;
             gap: 48px;
         }
-
         .footer-logo {
             font-family: 'DM Sans', sans-serif;
             font-size: 13px;
             font-weight: 700;
             letter-spacing: 0.1em;
-            color: #1C1917;
+            color: var(--text);
             text-decoration: none;
             display: block;
             margin-bottom: 12px;
+            transition: color 0.3s ease;
         }
-
-        .footer-tagline {
-            font-size: 13px;
-            color: var(--muted);
-            line-height: 1.75;
-            max-width: 240px;
-        }
-
+        .footer-tagline { font-size: 13px; color: var(--muted); line-height: 1.75; max-width: 240px; transition: color 0.3s ease; }
         .footer-col h4 {
             font-family: 'DM Sans', sans-serif;
             font-size: 11px;
@@ -667,43 +627,9 @@
             color: #6B84A8;
             margin-bottom: 20px;
         }
-
-        .footer-col ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .footer-col a {
-            font-size: 13px;
-            color: var(--muted);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .footer-col a:hover {
-            color: #1C1917;
-        }
-
-        .court-topbar {
-            padding: 8px 12px;
-            border-bottom: 1px solid rgba(180,83,9,0.2);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .court-bottombar {
-            padding: 12px;
-            border-top: 1px solid rgba(180,83,9,0.2);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
+        .footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+        .footer-col a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+        .footer-col a:hover { color: var(--text); }
         .footer-bottom {
             max-width: 1200px;
             margin: 48px auto 0;
@@ -712,94 +638,31 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: border-color 0.3s ease;
         }
-
-        .footer-bottom p,
-        .footer-bottom a {
-            font-size: 12px;
-            color: #6B84A8;
-        }
-
-        .footer-bottom a {
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .footer-bottom a:hover {
-            color: var(--muted);
-        }
-
-        .footer-legal {
-            display: flex;
-            gap: 24px;
-        }
+        .footer-bottom p, .footer-bottom a { font-size: 12px; color: #6B84A8; }
+        .footer-bottom a { text-decoration: none; transition: color 0.2s; }
+        .footer-bottom a:hover { color: var(--muted); }
+        .footer-legal { display: flex; gap: 24px; }
 
         /* ─── Responsive ─── */
         @media (max-width: 960px) {
-            .footer-inner {
-                grid-template-columns: 1fr 1fr;
-                gap: 40px;
-            }
+            .footer-inner { grid-template-columns: 1fr 1fr; gap: 40px; }
         }
-
         @media (max-width: 768px) {
-            section {
-                padding: 80px 20px;
-            }
-
-            #hero {
-                padding: 96px 20px 64px;
-            }
-
-            .hero-overlay {
-                background: rgba(0, 0, 0, 0.4);
-            }
-
-            .nav-inner {
-                padding: 0 20px;
-            }
-
-            .nav-links,
-            .nav-actions {
-                display: none;
-            }
-
-            #mobile-btn {
-                display: block;
-            }
-
-            .hero-h1 {
-                font-size: 42px;
-            }
-
-            .step-row {
-                flex-wrap: wrap;
-            }
-
-            .feat-row {
-                grid-template-columns: 1fr;
-                gap: 6px;
-            }
-
-            .problem-split { grid-template-columns: 1fr; gap: 48px; }
+            section { padding: 80px 20px; }
+            #hero { padding: 96px 20px 64px; }
+            .nav-inner { padding: 0 20px; }
+            .nav-links, .nav-actions { display: none; }
+            #mobile-btn { display: block; }
+            .hero-h1 { font-size: 42px; }
+            .step-row { flex-wrap: wrap; }
+            .feat-row { grid-template-columns: 1fr; gap: 6px; }
             .stats-split { grid-template-columns: 1fr; gap: 40px; }
-            #revenue .reveal-delay-1 { grid-template-columns: 1fr !important; }
-            .stats-grid { gap: 24px; }
-
-            footer {
-                padding: 48px 20px;
-            }
-
-            .footer-inner {
-                grid-template-columns: 1fr;
-                gap: 32px;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: 12px;
-                text-align: center;
-            }
+            .revenue-split { grid-template-columns: 1fr; gap: 40px; }
+            footer { padding: 48px 20px; }
+            .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+            .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
         }
     </style>
 </head>
@@ -814,17 +677,20 @@
                 <a href="#how-it-works">How it works</a>
                 <a href="#revenue">Revenue model</a>
                 <a href="#tech">The tech</a>
-                <a href="#pricing">Pilot program</a>
+                <a href="#contact">Get in touch</a>
             </div>
             <div class="nav-actions">
-                <a href="#pricing" class="btn-primary">Apply for pilot</a>
+                <button id="theme-btn" type="button" aria-label="Toggle theme">
+                    <span class="theme-icon">◑</span>
+                    <span class="theme-label">Dark mode</span>
+                </button>
+                <a href="#contact" class="btn-primary">Express interest</a>
             </div>
-            <button id="mobile-btn" type="button" aria-label="Open menu" aria-controls="mobile-menu"
-                aria-expanded="false">
+            <button id="mobile-btn" type="button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">
                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-                    <rect y="4" width="22" height="1.5" fill="#1C1917" />
-                    <rect y="10" width="22" height="1.5" fill="#1C1917" />
-                    <rect y="16" width="22" height="1.5" fill="#1C1917" />
+                    <rect y="4" width="22" height="1.5" fill="currentColor" />
+                    <rect y="10" width="22" height="1.5" fill="currentColor" />
+                    <rect y="16" width="22" height="1.5" fill="currentColor" />
                 </svg>
             </button>
         </div>
@@ -834,71 +700,87 @@
     <div id="mobile-menu" aria-hidden="true">
         <button id="mobile-close" type="button" aria-label="Close menu">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M6 6l12 12M18 6L6 18" stroke="#1C1917" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
             </svg>
         </button>
         <a href="#how-it-works" class="mobile-link">How it works</a>
         <a href="#revenue" class="mobile-link">Revenue model</a>
         <a href="#tech" class="mobile-link">The tech</a>
-        <a href="#pricing" class="mobile-link">Pilot program</a>
+        <a href="#contact" class="mobile-link">Get in touch</a>
         <div style="margin-top: auto; display:flex; flex-direction:column; gap:12px;">
-            <a href="#pricing" class="btn-primary" style="width:100%; text-align:center;">Apply for pilot</a>
+            <a href="#contact" class="btn-primary" style="width:100%; text-align:center;">Express interest</a>
         </div>
     </div>
 
     <!-- ─── HERO ─── -->
     <header id="hero">
         <div class="hero-inner">
-            <!-- Left -->
             <div class="reveal">
                 <div class="section-label">Smart Court Technology</div>
-                <h1 class="hero-h1">Your court. Zero disputes. ₹3L more per year.</h1>
+                <h1 class="hero-h1">Your court. Zero disputes.<br><span class="accent">₹90,000</span> more per year.</h1>
                 <p class="hero-sub">InBound Vision installs an AI line-calling system on your pickleball court at zero upfront cost. Players get instant In/Out calls. You earn more from every booking.</p>
                 <div class="hero-actions">
-                    <a href="#pricing" class="btn-primary">Apply for free pilot</a>
+                    <a href="#contact" class="btn-primary">Express interest</a>
                     <a href="#how-it-works" class="btn-ghost">See how it works ↓</a>
                 </div>
-                <div class="hero-footnote">Rolling out with select partner courts in India</div>
+                <div class="hero-footnote">Pilot launching with select partner courts in Hyderabad &amp; Bangalore</div>
             </div>
         </div>
     </header>
 
     <!-- ─── CREDIBILITY BAR ─── -->
-    <div style="text-align: center; padding: 24px 20px; font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); border-bottom: 1px solid var(--rule); background: var(--surface); letter-spacing: 0.05em;">
-        80 FPS real-time tracking <span style="margin: 0 12px; color: rgba(120,100,60,0.3);">·</span> Runs on NVIDIA Jetson edge hardware <span style="margin: 0 12px; color: rgba(120,100,60,0.3);">·</span> Trained on 10,000+ court images
+    <div class="cred-bar">
+        <span>80 FPS real-time tracking</span>
+        <span class="cred-dot">·</span>
+        <span>Runs on NVIDIA Jetson edge hardware</span>
+        <span class="cred-dot">·</span>
+        <span>Trained on 10,000+ court images</span>
     </div>
 
+    <!-- ─── PROBLEM ─── -->
+    <section id="problem">
+        <div class="container-narrow">
+            <div class="reveal">
+                <div class="section-label">The Problem</div>
+                <h2 style="font-size:clamp(32px,4vw,44px);">Line disputes are killing the game.</h2>
+            </div>
+            <div class="reveal reveal-delay-1">
+                <div class="problem-list">
+                    <div class="problem-item">Arguments over close calls slow every session down and frustrate players.</div>
+                    <div class="problem-item">Without an official, there is no neutral arbiter — just two people disagreeing.</div>
+                    <div class="problem-item">Upset players don't rebook. Courts lose revenue, not just games.</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-
-        <!-- ─── DEMO ─── -->
-    <section id="demo">
+    <!-- ─── DEMO ─── -->
+    <section id="demo" class="section-surface">
         <div class="container-narrow">
             <div class="reveal">
                 <div class="section-label">See It Live</div>
                 <h2 style="font-size:clamp(32px,4vw,44px);">Watch the system make a call.</h2>
             </div>
             <div class="reveal reveal-delay-1">
-                <div class="demo-video" style="position:relative; aspect-ratio:16/9; overflow:hidden; background:#111E35; border-radius:8px;">
+                <div class="demo-video-wrap">
                     <video id="demo-vid" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block;">
                         <source src="output_compressed.mp4" type="video/mp4">
                     </video>
-                    <div id="video-fallback" style="display:none;position:absolute;inset:0;background:#111E35;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:48px 24px;box-sizing:border-box;">
-                        <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div id="video-fallback" style="display:none;position:absolute;inset:0;background:#111E35;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:48px 24px;">
+                        <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
                             <circle cx="36" cy="36" r="35" stroke="rgba(250,248,244,0.15)" stroke-width="1.5"/>
                             <polygon points="30,24 52,36 30,48" fill="rgba(250,248,244,0.4)"/>
                         </svg>
                         <div style="text-align:center;">
-                            <div style="font-family:'DM Sans',sans-serif;font-size:16px;color:rgba(250,248,244,0.6);margin-bottom:8px;">Demo video coming soon</div>
-                            <div style="font-family:'DM Sans',sans-serif;font-size:13px;color:rgba(250,248,244,0.35);max-width:340px;line-height:1.6;">Live system demo available on request — contact <a href="mailto:hello@inboundvision.com" style="color:#B45309;text-decoration:none;">hello@inboundvision.com</a></div>
+                            <div style="font-size:16px;color:rgba(250,248,244,0.6);margin-bottom:8px;">Demo video coming soon</div>
+                            <div style="font-size:13px;color:rgba(250,248,244,0.35);max-width:340px;line-height:1.6;">Live system demo available on request — contact <a href="mailto:hello@inboundvision.com" style="color:#22C55E;text-decoration:none;">hello@inboundvision.com</a></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <p class="demo-caption">Live system recording coming soon. The system tracks the ball at 80 frames per second and makes the In/Out call in under 15 milliseconds.</p>
+            <p class="demo-caption">The system tracks the ball at 80 frames per second and makes the In/Out call in under 15 milliseconds.</p>
         </div>
     </section>
-
-
 
     <!-- ─── HOW IT WORKS ─── -->
     <section id="how-it-works">
@@ -912,7 +794,7 @@
                     <div class="step-num">01</div>
                     <div class="step-body">
                         <div class="step-title">We install the system</div>
-                        <div class="step-desc">Our team installs two cameras and an edge AI unit on your court. Takes under one hour.</div>
+                        <div class="step-desc">Our team mounts two cameras and an edge AI unit on your court. Takes under one hour — zero disruption to your schedule.</div>
                     </div>
                     <div class="step-tag">Zero effort</div>
                 </div>
@@ -920,7 +802,7 @@
                     <div class="step-num">02</div>
                     <div class="step-body">
                         <div class="step-title">It runs automatically</div>
-                        <div class="step-desc">The system tracks every ball in real time, 80 frames per second, no internet required.</div>
+                        <div class="step-desc">The system tracks every ball in real time at 80 frames per second. No internet required. No ongoing management.</div>
                     </div>
                     <div class="step-tag">Always on</div>
                 </div>
@@ -928,16 +810,24 @@
                     <div class="step-num">03</div>
                     <div class="step-body">
                         <div class="step-title">Players get instant calls</div>
-                        <div class="step-desc">In/Out decisions are made in milliseconds, displayed on screen. No disputes, no arguments.</div>
+                        <div class="step-desc">In/Out decisions appear on screen in milliseconds. No disputes, no arguments — just play.</div>
                     </div>
                     <div class="step-tag">Dispute-free</div>
+                </div>
+                <div class="step-row">
+                    <div class="step-num">04</div>
+                    <div class="step-body">
+                        <div class="step-title">You collect the upside</div>
+                        <div class="step-desc">Charge a Smart Court premium on every booking. We handle all hardware, maintenance, and software updates.</div>
+                    </div>
+                    <div class="step-tag">Day one revenue</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ─── TECH ─── -->
-    <section id="tech" style="background: var(--surface);">
+    <section id="tech" class="section-surface">
         <div class="container-narrow">
             <div class="reveal">
                 <div class="section-label">The Technology</div>
@@ -946,21 +836,23 @@
             <div class="feat-table reveal reveal-delay-1">
                 <div class="feat-row">
                     <div class="feat-name">80 frames per second</div>
-                    <div class="feat-desc">The system processes every frame of live video locally on an NVIDIA Jetson edge device. No footage leaves the court.</div>
+                    <div class="feat-desc">Every frame of live video is processed locally on an NVIDIA Jetson edge device. No footage leaves the court. No cloud subscription.</div>
                 </div>
                 <div class="feat-row">
                     <div class="feat-name">Works without internet</div>
-                    <div class="feat-desc">All AI inference happens on-device. A bad Wi-Fi day never affects a line call.</div>
+                    <div class="feat-desc">All AI inference runs on-device. A bad Wi-Fi day never affects a line call. The system works the moment it's powered on.</div>
                 </div>
                 <div class="feat-row">
                     <div class="feat-name">Trained on real court data</div>
-                    <div class="feat-desc">The model is trained on pickleball-specific footage — not generic object detection. It knows what a bounce looks like on a compact court at 60 mph.</div>
+                    <div class="feat-desc">The model is trained on pickleball-specific footage — not generic object detection. It understands what a bounce looks like on a compact court at speed.</div>
+                </div>
+                <div class="feat-row">
+                    <div class="feat-name">Automatic highlights</div>
+                    <div class="feat-desc">The system clips and stores rally highlights automatically. Players can review their best moments — a premium feature courts can offer as an add-on.</div>
                 </div>
             </div>
         </div>
     </section>
-
-    
 
     <!-- ─── REVENUE ─── -->
     <section id="revenue">
@@ -969,94 +861,86 @@
                 <div class="section-label">Revenue Model</div>
                 <h2 style="font-size:clamp(32px,4vw,44px);">You earn from every Smart Court booking.</h2>
             </div>
-
-            <div class="reveal reveal-delay-1" style="display:grid; grid-template-columns:1.2fr 1fr; gap:56px; margin-top:48px; align-items:start;">
-
-                <!-- Left: rate breakdown table -->
+            <div class="revenue-split reveal reveal-delay-1">
                 <div>
-                    <div style="border-top:1px solid var(--rule);">
-                        <div style="display:flex; justify-content:space-between; align-items:baseline; padding:20px 0; border-bottom:1px solid var(--rule);">
-                            <span style="font-size:15px; color:var(--muted);">Standard court rate</span>
-                            <span style="font-family:'DM Sans',sans-serif; font-size:16px; font-weight:700; color:#1C1917;">&#x20B9;1,000 / hour</span>
+                    <div class="revenue-table">
+                        <div class="revenue-row">
+                            <span class="revenue-label">Standard court rate</span>
+                            <span class="revenue-value">&#x20B9;1,000 / hour</span>
                         </div>
-                        <div style="display:flex; justify-content:space-between; align-items:baseline; padding:20px 0; border-bottom:1px solid var(--rule);">
-                            <span style="font-size:15px; color:var(--muted);">Smart Court upcharge</span>
-                            <span style="font-family:'DM Sans',sans-serif; font-size:16px; font-weight:700; color:#B45309;">+&#x20B9;100 / hour</span>
+                        <div class="revenue-row">
+                            <span class="revenue-label">Smart Court upcharge</span>
+                            <span class="revenue-value accent">+&#x20B9;100 / hour</span>
                         </div>
-                        <div style="display:flex; justify-content:space-between; align-items:baseline; padding:20px 0; border-bottom:1px solid var(--rule);">
-                            <span style="font-size:15px; color:var(--muted);">Your share</span>
-                            <span style="font-family:'DM Sans',sans-serif; font-size:16px; font-weight:700; color:#16A34A;">&#x20B9;30 per hour during pilot</span>
+                        <div class="revenue-row">
+                            <span class="revenue-label">Your share (pilot)</span>
+                            <span class="revenue-value success">&#x20B9;30 / hour</span>
                         </div>
                     </div>
-                    <p style="margin-top:24px; font-size:13px; color:var(--muted); line-height:1.7;">At 10 hours/day, 300 days/year — that&#x2019;s &#x20B9;90,000 additional revenue per court in year one.</p>
+                    <p class="revenue-note">At 10 hours/day, 300 days/year — that's <strong>&#x20B9;90,000 additional revenue</strong> per court during the pilot period.</p>
+                    <p class="revenue-sub">Post-pilot revenue share is renegotiated based on performance. Courts that launch early lock in the most favourable long-term terms.</p>
                 </div>
-
-                <!-- Right: zero-cost card -->
-                <div style="background:#1C1917; border-radius:8px; padding:48px 36px; text-align:center;">
-                    <div style="font-family:'DM Serif Display',Georgia,serif; font-size:72px; font-weight:400; color:#B45309; line-height:1;">&#x20B9;0</div>
-                    <div style="font-size:15px; color:rgba(250,248,244,0.7); margin-top:12px; font-weight:500;">Upfront cost to you</div>
-                    <div style="margin-top:24px; padding-top:24px; border-top:1px solid rgba(250,248,244,0.1); font-size:13px; color:rgba(250,248,244,0.45); line-height:1.7;">We install, maintain, and operate the system. You just collect the upside.</div>
+                <div class="zero-card">
+                    <div class="zero-num">&#x20B9;0</div>
+                    <div class="zero-label">Upfront cost to you</div>
+                    <div class="zero-sub">We install, maintain, and operate the system. You just collect the upside.</div>
                 </div>
-
             </div>
         </div>
     </section>
 
     <!-- ─── SOCIAL PROOF ─── -->
-    <section id="social-proof">
+    <section id="social-proof" class="section-surface">
         <div class="container-narrow">
             <div class="reveal">
-                <div class="section-label">The Demand</div>
-                <h2 style="font-size:clamp(32px,4vw,44px);">Players want Smart Courts</h2>
+                <div class="section-label">Player Demand</div>
+                <h2 style="font-size:clamp(32px,4vw,44px);">Players are already asking for this.</h2>
             </div>
             <div class="stats-split reveal reveal-delay-1">
-                <!-- Left: Stats Grid -->
-                <div class="stats-grid">
-                    <div>
-                        <div style="font-family:'DM Serif Display',Georgia,serif; font-size:48px; font-weight:400; color:#B45309; line-height:1.1;">71%</div>
-                        <div style="font-size:14px; color:var(--muted); margin-top:6px; max-width: 150px;">Face disputes every match</div>
+                <div>
+                    <div class="stats-grid">
+                        <div>
+                            <div class="stat-num">71%</div>
+                            <div class="stat-label">face disputes every match</div>
+                        </div>
+                        <div>
+                            <div class="stat-num">92%</div>
+                            <div class="stat-label">willing to pay more for AI calling</div>
+                        </div>
+                        <div>
+                            <div class="stat-num">50%</div>
+                            <div class="stat-label">would switch to a Smart Court</div>
+                        </div>
+                        <div>
+                            <div class="stat-num">81%</div>
+                            <div class="stat-label">want automated match highlights</div>
+                        </div>
                     </div>
-                    <div>
-                        <div style="font-family:'DM Serif Display',Georgia,serif; font-size:48px; font-weight:400; color:#B45309; line-height:1.1;">92%</div>
-                        <div style="font-size:14px; color:var(--muted); margin-top:6px; max-width: 150px;">Willing to pay for AI calling</div>
-                    </div>
-                    <div>
-                        <div style="font-family:'DM Serif Display',Georgia,serif; font-size:48px; font-weight:400; color:#B45309; line-height:1.1;">50%</div>
-                        <div style="font-size:14px; color:var(--muted); margin-top:6px; max-width: 150px;">Would switch to a Smart Court</div>
-                    </div>
-                    <div>
-                        <div style="font-family:'DM Serif Display',Georgia,serif; font-size:48px; font-weight:400; color:#B45309; line-height:1.1;">81%</div>
-                        <div style="font-size:14px; color:var(--muted); margin-top:6px; max-width: 150px;">Want automated highlights</div>
-                    </div>
+                    <p class="stat-source">Player survey, n=180 · Hyderabad &amp; Bangalore, Jan 2026</p>
                 </div>
-
-                <!-- Right: Callout -->
-                <div class="price-card" style="padding: 40px 32px; border: 1px solid rgba(180,83,9,0.2); border-radius: 6px; text-align: center;">
-                    <div style="font-family:'DM Sans',sans-serif; font-size:22px; font-weight:700; color:#1C1917; margin-bottom: 16px;">Now Accepting Applications</div>
-                    <div style="display: inline-block; background: rgba(180,83,9,0.1); border: 1px solid rgba(180,83,9,0.3); color: #B45309; font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 100px; margin-bottom: 32px; letter-spacing: 0.05em; text-transform: uppercase;">
-                        3 of 10 pilot spots remaining
-                    </div>
-                    <a href="mailto:hello@inboundvision.com" class="price-cta price-cta-primary" style="font-size: 15px; padding: 14px 24px; width: 100%;">Apply for pilot program</a>
+                <div class="pilot-callout">
+                    <div style="font-size:20px;font-weight:700;color:var(--text);margin-bottom:16px;line-height:1.3;transition:color 0.3s ease;">Pilot spots are limited</div>
+                    <div class="pilot-badge">10 courts · Hyderabad &amp; Bangalore</div>
+                    <p style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:28px;transition:color 0.3s ease;">We're selecting pilot partners who want to be first to offer a Smart Court experience in their city.</p>
+                    <a href="#contact" class="btn-primary" style="font-size:15px;padding:14px 24px;display:block;text-align:center;">Express interest</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Hardware section merged into Features table -->
-
     <!-- ─── NEXT STEPS ─── -->
-    <section id="next-steps" style="background: var(--surface);">
+    <section id="next-steps">
         <div class="container-narrow">
             <div class="reveal">
                 <div class="section-label">The Process</div>
-                <h2 style="font-size:clamp(32px,4vw,44px);">From application to earning in 7 days.</h2>
+                <h2 style="font-size:clamp(32px,4vw,44px);">From conversation to earning in 7 days.</h2>
             </div>
             <div class="steps-list reveal reveal-delay-1">
                 <div class="step-row">
                     <div class="step-num">01</div>
                     <div class="step-body">
-                        <div class="step-title">You apply</div>
-                        <div class="step-desc">Fill in the short form below. We&#x2019;ll reach out within 48 hours to schedule a court visit.</div>
+                        <div class="step-title">Express interest</div>
+                        <div class="step-desc">Reach out via the contact below. We'll schedule a brief call to discuss your court and answer any questions.</div>
                     </div>
                     <div class="step-tag">Takes 2 minutes</div>
                 </div>
@@ -1072,7 +956,7 @@
                     <div class="step-num">03</div>
                     <div class="step-body">
                         <div class="step-title">You start earning</div>
-                        <div class="step-desc">Go live immediately. Offer the Smart Court experience to your players and collect your share of every &#x20B9;100 upcharge.</div>
+                        <div class="step-desc">Go live immediately. Offer the Smart Court experience to your players and collect your share of every ₹100 upcharge from day one.</div>
                     </div>
                     <div class="step-tag">Day one revenue</div>
                 </div>
@@ -1080,39 +964,73 @@
         </div>
     </section>
 
-    <!-- ─── PILOT PROGRAM ─── -->
-    <section id="pricing">
+    <!-- ─── PILOT TERMS ─── -->
+    <section id="pricing" class="section-surface">
         <div class="container-narrow">
-            <div class="reveal" style="text-align: center; margin-bottom: 48px;">
-                <div class="section-label">Pilot Program</div>
-                <h2 style="font-size:clamp(32px,4vw,44px);">Join the Smart Court pilot</h2>
+            <div class="reveal" style="margin-bottom:48px;">
+                <div class="section-label">Pilot Terms</div>
+                <h2 style="font-size:clamp(32px,4vw,44px);">What you get as a pilot partner.</h2>
             </div>
-            
-            <div class="reveal reveal-delay-1" style="max-width: 540px; margin: 0 auto;">
-                <div class="price-card featured" style="border: 1px solid rgba(180,83,9,0.2); border-radius: 6px; padding: 48px 40px;">
-                    <ul class="price-features" style="margin-bottom: 40px; gap: 24px;">
-                        <li style="font-size: 16px; color: #1C1917; line-height: 1.6;"><strong style="color: #B45309;">Zero hardware cost</strong> to the court owner during the pilot</li>
-                        <li style="font-size: 16px; color: #1C1917; line-height: 1.6;"><strong style="color: #B45309;">₹100/hour</strong> Smart Court upcharge split between the platform and the court</li>
-                        <li style="font-size: 16px; color: #1C1917; line-height: 1.6;"><strong style="color: #B45309;">Limited to 10 courts</strong> in Hyderabad and Bangalore</li>
-                    </ul>
-                    <a href="mailto:hello@inboundvision.com" class="price-cta price-cta-primary" style="font-size: 15px; padding: 14px 24px;">Apply for pilot</a>
+            <div class="terms-table reveal reveal-delay-1">
+                <div class="terms-row">
+                    <span class="terms-label">Hardware cost</span>
+                    <span class="terms-value">Zero. InBound Vision supplies and installs all equipment at no charge during the pilot.</span>
                 </div>
-
-                <form id="pilot-form" class="apply-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                    <input type="hidden" name="_subject" value="New InBound Vision Pilot Application">
-                    <input type="text" name="Court/Facility Name" placeholder="Court / Facility name" required>
-                    <input type="text" name="Name" placeholder="Your name" required>
-                    <input type="tel" name="Phone" placeholder="Phone number" required>
-                    <button type="submit" class="apply-btn">Send application</button>
-                </form>
-                <div id="form-success" style="display:none; text-align:center; padding:24px; font-size:15px; color:#16A34A; font-family: 'DM Sans', sans-serif;">
-                    Application sent — we'll be in touch within 48 hours.
+                <div class="terms-row">
+                    <span class="terms-label">Maintenance</span>
+                    <span class="terms-value">Fully managed by InBound Vision. Software updates, hardware support, and on-site visits included.</span>
+                </div>
+                <div class="terms-row">
+                    <span class="terms-label">Court upcharge</span>
+                    <span class="terms-value">&#x20B9;100 per Smart Court booking hour, split between the platform and the court partner.</span>
+                </div>
+                <div class="terms-row">
+                    <span class="terms-label">Your share</span>
+                    <span class="terms-value">&#x20B9;30 per hour during the pilot period — &#x20B9;90,000/year at standard utilisation.</span>
+                </div>
+                <div class="terms-row">
+                    <span class="terms-label">Pilot duration</span>
+                    <span class="terms-value">3 months, after which terms are renegotiated based on results. Early partners get priority on long-term agreements.</span>
+                </div>
+                <div class="terms-row">
+                    <span class="terms-label">Coverage</span>
+                    <span class="terms-value">Currently accepting applications from courts in Hyderabad and Bangalore.</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section removed as it is now combined with the Pilot Program block -->
+    <!-- ─── CONTACT ─── -->
+    <section id="contact">
+        <div class="container-narrow">
+            <div class="reveal">
+                <div class="section-label">Get in Touch</div>
+                <h2 style="font-size:clamp(32px,4vw,44px);">Interested? Let's talk.</h2>
+                <p style="font-size:16px;color:var(--dim);margin-top:16px;line-height:1.8;max-width:480px;transition:color 0.3s ease;">We're selecting pilot courts now. Reach out directly — we respond within 24 hours and can answer any questions about the system, the terms, or what installation looks like at your venue.</p>
+            </div>
+            <div class="reveal reveal-delay-1">
+                <div class="contact-block">
+                    <div class="contact-row">
+                        <span class="contact-label">Email</span>
+                        <span class="contact-value"><a href="mailto:hello@inboundvision.com">hello@inboundvision.com</a></span>
+                    </div>
+                    <div class="contact-row">
+                        <span class="contact-label">Based in</span>
+                        <span class="contact-value">Hyderabad, India</span>
+                    </div>
+                    <div class="contact-row">
+                        <span class="contact-label">Pilot cities</span>
+                        <span class="contact-value">Hyderabad &amp; Bangalore</span>
+                    </div>
+                </div>
+                <div style="margin-top:40px;">
+                    <a href="mailto:hello@inboundvision.com?subject=Smart%20Court%20Pilot%20-%20Expression%20of%20Interest" class="btn-primary" style="font-size:15px;padding:14px 28px;">
+                        Send us an email →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- ─── FOOTER ─── -->
     <footer>
@@ -1120,14 +1038,14 @@
             <div>
                 <a href="#hero" class="footer-logo">INBOUND VISION</a>
                 <p class="footer-tagline">AI court intelligence for modern racket sports.</p>
-                <p class="footer-tagline" style="margin-top: 10px; font-style: italic;">Built in Hyderabad by a team that plays pickleball.</p>
+                <p class="footer-tagline" style="margin-top:10px;font-style:italic;">Built in Hyderabad by a team that plays pickleball.</p>
             </div>
             <div class="footer-col">
                 <h4>Product</h4>
                 <ul>
                     <li><a href="#how-it-works">Line Calling</a></li>
                     <li><a href="#tech">Highlights</a></li>
-                    <li><a href="#revenue">Analytics</a></li>
+                    <li><a href="#revenue">Revenue Model</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -1147,13 +1065,37 @@
     </footer>
 
     <script>
-        // Navbar border on scroll
+        // ─── Theme toggle ───
+        const html = document.documentElement;
+        const themeBtn = document.getElementById('theme-btn');
+        const themeLabel = themeBtn.querySelector('.theme-label');
+        const themeIcon = themeBtn.querySelector('.theme-icon');
+
+        function applyTheme(theme) {
+            html.setAttribute('data-theme', theme);
+            document.querySelector('meta[name="theme-color"]').content =
+                theme === 'dark' ? '#0A0A0A' : '#F4F1EB';
+            themeLabel.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
+            themeIcon.textContent  = theme === 'dark' ? '☀' : '◑';
+            localStorage.setItem('iv-theme', theme);
+        }
+
+        // Restore saved preference
+        const saved = localStorage.getItem('iv-theme');
+        if (saved) applyTheme(saved);
+
+        themeBtn.addEventListener('click', () => {
+            const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            applyTheme(next);
+        });
+
+        // ─── Navbar border on scroll ───
         const nav = document.getElementById('nav');
         window.addEventListener('scroll', () => {
             nav.classList.toggle('scrolled', window.scrollY > 20);
         }, { passive: true });
 
-        // Scroll reveal
+        // ─── Scroll reveal ───
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(e => {
                 if (e.isIntersecting) {
@@ -1164,7 +1106,7 @@
         }, { threshold: 0.08 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Mobile menu
+        // ─── Mobile menu ───
         const mobileBtn = document.getElementById('mobile-btn');
         const mobileClose = document.getElementById('mobile-close');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -1177,7 +1119,6 @@
             document.body.style.overflow = 'hidden';
             mobileClose.focus();
         }
-
         function closeMenu() {
             mobileMenu.classList.remove('open');
             mobileMenu.setAttribute('aria-hidden', 'true');
@@ -1189,50 +1130,15 @@
         mobileBtn.addEventListener('click', openMenu);
         mobileClose.addEventListener('click', closeMenu);
         mobileLinks.forEach(l => l.addEventListener('click', closeMenu));
-        window.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu();
+        window.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu();
         });
 
-        // Form handling
-        const form = document.getElementById('pilot-form');
-        const successMsg = document.getElementById('form-success');
-
-        if (form && successMsg) {
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const formData = new FormData(form);
-                const btn = form.querySelector('button');
-                const originalBtnText = btn.textContent;
-                
-                btn.textContent = 'Sending...';
-                btn.disabled = true;
-
-                try {
-                    const response = await fetch(form.action, {
-                        method: 'POST',
-                        body: formData,
-                        headers: { 'Accept': 'application/json' }
-                    });
-                    
-                    if (response.ok) {
-                        form.style.display = 'none';
-                        successMsg.style.display = 'block';
-                    } else {
-                        throw new Error('Form submission failed');
-                    }
-                } catch (err) {
-                    alert('Oops! There was a problem sending your application. Please try again.');
-                    btn.textContent = originalBtnText;
-                    btn.disabled = false;
-                }
-            });
-        }
-
-        // Video fallback
+        // ─── Video fallback ───
         const vid = document.getElementById('demo-vid');
         const fallback = document.getElementById('video-fallback');
         if (vid && fallback) {
-            vid.addEventListener('error', function() {
+            vid.addEventListener('error', () => {
                 vid.style.display = 'none';
                 fallback.style.display = 'flex';
             });
