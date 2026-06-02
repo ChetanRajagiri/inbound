@@ -8,46 +8,58 @@
     <title>Inbound Vision — AI Court Intelligence</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap"
+        rel="stylesheet">
     <style>
         /* ─── Theme tokens ─── */
         :root,
         [data-theme="light"] {
-            --bg:         #F4F1EB;
-            --surface:    #E6EDE6;
-            --text:       #1A2E1A;
-            --muted:      #5C6E5C;
-            --dim:        #4A5E4A;
-            --accent:     #D97706;
-            --primary:    #1A3D2B;
-            --btn-text:   #F4F1EB;
-            --rule:       rgba(26,46,26,0.10);
-            --nav-bg:     rgba(244,241,235,0.92);
-            --card-bg:    #1A3D2B;
-            --card-fg:    rgba(244,241,235,0.60);
-            --card-label: rgba(244,241,235,0.42);
-            --stat-num:   #D97706;
+            --bg: #F4F1EB;
+            --surface: #E6EDE6;
+            --text: #1A2E1A;
+            --muted: #5C6E5C;
+            --dim: #4A5E4A;
+            --accent: #D97706;
+            --accent-glow: rgba(217, 119, 6, 0.25);
+            --primary: #1A3D2B;
+            --btn-text: #F4F1EB;
+            --rule: rgba(26, 46, 26, 0.10);
+            --nav-bg: rgba(244, 241, 235, 0.92);
+            --card-bg: #1A3D2B;
+            --card-fg: rgba(244, 241, 235, 0.60);
+            --card-label: rgba(244, 241, 235, 0.42);
+            --stat-num: #D97706;
         }
 
         [data-theme="dark"] {
-            --bg:         #0A0A0A;
-            --surface:    #141414;
-            --text:       #F0EDE8;
-            --muted:      #6B7280;
-            --dim:        rgba(240,237,232,0.55);
-            --accent:     #22C55E;
-            --primary:    #22C55E;
-            --btn-text:   #0A0A0A;
-            --rule:       rgba(255,255,255,0.07);
-            --nav-bg:     rgba(10,10,10,0.90);
-            --card-bg:    #111111;
-            --card-fg:    rgba(240,237,232,0.50);
-            --card-label: rgba(240,237,232,0.38);
-            --stat-num:   #22C55E;
+            /* Deep, premium forest green instead of pure black for a sportier feel */
+            --bg: #070A07;
+            --surface: #111611;
+            --text: #F0EDE8;
+            --muted: #869686;
+            --dim: rgba(240, 237, 232, 0.60);
+            --accent: #22C55E;
+            --accent-glow: rgba(34, 197, 94, 0.20);
+            --primary: #22C55E;
+            --btn-text: #070A07;
+            --rule: rgba(255, 255, 255, 0.08);
+            --nav-bg: rgba(7, 10, 7, 0.90);
+            --card-bg: #141A14;
+            --card-fg: rgba(240, 237, 232, 0.65);
+            --card-label: rgba(240, 237, 232, 0.45);
+            --stat-num: #22C55E;
         }
 
-        *,*::before,*::after { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             margin: 0;
@@ -60,85 +72,283 @@
             transition: background 0.4s ease, color 0.3s ease;
         }
 
-        h1, h2 {
+        h1,
+        h2 {
             font-family: 'DM Serif Display', Georgia, serif;
             font-weight: 400;
             line-height: 1.1;
             letter-spacing: -0.01em;
             margin: 0;
         }
-        h3, h4 { font-family: 'DM Sans', sans-serif; font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; margin: 0; }
-        p { margin: 0; }
-        button, input, textarea, select { font: inherit; }
+
+        h3,
+        h4 {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            margin: 0;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
 
         /* ─── Scroll reveal ─── */
-        .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
-        .reveal.visible { opacity: 1; transform: none; }
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .reveal-delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .reveal-delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .reveal-delay-3 {
+            transition-delay: 0.3s;
+        }
 
         /* ─── Navbar ─── */
         #nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-            height: 64px; display: flex; align-items: center;
-            background: var(--nav-bg); backdrop-filter: blur(12px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid transparent;
             transition: border-color 0.3s ease, background 0.4s ease;
         }
-        #nav.scrolled { border-bottom-color: var(--rule); }
-        .nav-inner { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; }
-        .nav-logo { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.1em; color: var(--text); text-decoration: none; transition: color 0.3s ease; }
-        .nav-links { display: flex; align-items: center; gap: 36px; }
-        .nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-        .nav-links a:hover { color: var(--text); }
-        .nav-actions { display: flex; align-items: center; gap: 14px; }
+
+        #nav.scrolled {
+            border-bottom-color: var(--rule);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+        }
+
+        [data-theme="dark"] #nav.scrolled {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-inner {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 0.1em;
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+
+        .nav-links a {
+            font-size: 13px;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
 
         #theme-btn {
-            display: inline-flex; align-items: center; gap: 7px;
-            font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.04em;
-            padding: 6px 14px; border-radius: 100px; cursor: pointer;
-            border: 1px solid var(--rule); background: transparent; color: var(--muted);
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            padding: 6px 14px;
+            border-radius: 100px;
+            cursor: pointer;
+            border: 1px solid var(--rule);
+            background: transparent;
+            color: var(--muted);
             transition: all 0.3s ease;
         }
-        #theme-btn:hover { color: var(--text); border-color: var(--accent); }
-        #theme-btn .theme-icon { font-size: 14px; line-height: 1; }
+
+        #theme-btn:hover {
+            color: var(--text);
+            border-color: var(--accent);
+            background: var(--surface);
+        }
+
+        #theme-btn .theme-icon {
+            font-size: 14px;
+            line-height: 1;
+        }
 
         /* ─── Buttons ─── */
         .btn-primary {
-            display: inline-flex; align-items: center; justify-content: center;
-            font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
-            background: var(--primary); color: var(--btn-text);
-            padding: 9px 20px; border-radius: 3px; text-decoration: none; border: none; cursor: pointer;
-            transition: opacity 0.2s, background 0.4s ease, color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            background: var(--primary);
+            color: var(--btn-text);
+            padding: 10px 22px;
+            border-radius: 4px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-        .btn-primary:hover { opacity: 0.88; }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px var(--accent-glow);
+            filter: brightness(1.1);
+        }
+
         .btn-ghost {
-            display: inline-flex; align-items: center; justify-content: center;
-            font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 400;
-            background: transparent; color: var(--muted); padding: 9px 20px;
-            border-radius: 3px; text-decoration: none; border: 1px solid var(--rule); cursor: pointer;
-            transition: color 0.2s, border-color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            background: transparent;
+            color: var(--muted);
+            padding: 9px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            border: 1px solid var(--rule);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-        .btn-ghost:hover { color: var(--text); border-color: var(--accent); }
+
+        .btn-ghost:hover {
+            color: var(--text);
+            border-color: var(--text);
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        [data-theme="dark"] .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
 
         /* ─── Mobile nav ─── */
-        #mobile-btn { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+        #mobile-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            color: var(--text);
+        }
+
         #mobile-menu {
-            display: none; position: fixed; inset: 0; z-index: 99;
-            background: var(--bg); flex-direction: column; padding: 88px 32px 40px; gap: 32px;
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 99;
+            background: var(--bg);
+            flex-direction: column;
+            padding: 88px 32px 40px;
+            gap: 32px;
             transition: background 0.4s ease;
         }
-        #mobile-menu.open { display: flex; }
-        #mobile-menu a { font-family: 'DM Sans', sans-serif; font-size: 28px; font-weight: 700; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-        #mobile-menu a:hover { color: var(--text); }
-        #mobile-close { position: absolute; top: 20px; right: 28px; background: none; border: none; cursor: pointer; padding: 4px; }
+
+        #mobile-menu.open {
+            display: flex;
+        }
+
+        #mobile-menu a {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        #mobile-menu a:hover {
+            color: var(--text);
+        }
+
+        #mobile-close {
+            position: absolute;
+            top: 20px;
+            right: 28px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            color: var(--text);
+        }
 
         /* ─── Section rhythm ─── */
-        section { padding: 120px 32px; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        .container-narrow { max-width: 800px; margin: 0 auto; }
-        .section-label { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; transition: color 0.3s ease; }
+        section {
+            padding: 120px 32px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .container-narrow {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
 
         /* ─── HERO — split layout ─── */
         #hero {
@@ -163,38 +373,57 @@
         }
 
         .hero-h1 {
-            font-size: clamp(40px, 4.5vw, 62px);
-            margin-bottom: 20px;
+            font-size: clamp(48px, 5vw, 68px);
+            margin-bottom: 24px;
             color: var(--text);
             transition: color 0.3s ease;
         }
-        .hero-h1 .accent { color: var(--accent); transition: color 0.4s ease; }
 
-        .hero-sub {
-            font-size: 16px; color: var(--dim); line-height: 1.8;
-            max-width: 400px; margin-bottom: 32px; transition: color 0.3s ease;
+        .hero-h1 .accent {
+            color: var(--accent);
+            transition: color 0.4s ease;
         }
 
-        .hero-actions { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; }
+        .hero-sub {
+            font-size: 17px;
+            color: var(--dim);
+            line-height: 1.7;
+            max-width: 440px;
+            margin-bottom: 40px;
+            transition: color 0.3s ease;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
 
         /* ─── Hero inline stats ─── */
         .hero-stats {
             display: flex;
-            gap: 28px;
-            padding-top: 28px;
+            gap: 36px;
+            padding-top: 32px;
             border-top: 1px solid var(--rule);
             transition: border-color 0.3s ease;
         }
+
         .hero-stat-num {
             font-family: 'DM Serif Display', serif;
-            font-size: 28px;
+            font-size: 32px;
             color: var(--stat-num);
             line-height: 1;
             transition: color 0.4s ease;
         }
+
         .hero-stat-label {
-            font-size: 11px; color: var(--muted); margin-top: 4px;
-            line-height: 1.4; max-width: 80px; transition: color 0.3s ease;
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 6px;
+            line-height: 1.4;
+            max-width: 90px;
+            transition: color 0.3s ease;
         }
 
         /* ─── Hero right — product visual ─── */
@@ -216,229 +445,850 @@
             position: absolute;
             inset: 0;
             background-image:
-                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
             background-size: 32px 32px;
             pointer-events: none;
         }
 
         .court-display {
             width: 100%;
-            max-width: 380px;
-            background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.10);
+            max-width: 400px;
+            background: rgba(0, 0, 0, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 12px;
-            padding: 28px;
+            padding: 32px;
             position: relative;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
         }
 
         [data-theme="light"] .court-display {
-            background: rgba(0,0,0,0.65);
-            border-color: rgba(255,255,255,0.12);
+            background: rgba(0, 0, 0, 0.75);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 24px 48px rgba(26, 61, 43, 0.3);
         }
 
         .court-display-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
+
         .court-display-label {
             font-size: 10px;
+            font-weight: 600;
             letter-spacing: 0.16em;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255, 255, 255, 0.5);
         }
+
         .live-badge {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             font-size: 10px;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 0.1em;
             color: #22C55E;
-            background: rgba(34,197,94,0.12);
-            border: 1px solid rgba(34,197,94,0.25);
-            padding: 3px 10px;
+            background: rgba(34, 197, 94, 0.12);
+            border: 1px solid rgba(34, 197, 94, 0.25);
+            padding: 4px 12px;
             border-radius: 100px;
         }
+
         .live-dot {
-            width: 5px; height: 5px; border-radius: 50%;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
             background: #22C55E;
             animation: pulse 1.8s ease-in-out infinite;
         }
+
         @keyframes pulse {
-            0%,100% { opacity: 1; }
-            50% { opacity: 0.3; }
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.4;
+                transform: scale(0.8);
+            }
         }
 
-        /* SVG court */
-        .court-svg { width: 100%; margin-bottom: 20px; }
+        /* SVG court & Animations */
+        .court-svg {
+            width: 100%;
+            margin-bottom: 24px;
+            overflow: visible;
+        }
+
+        .anim-trajectory {
+            stroke-dasharray: 120;
+            stroke-dashoffset: 120;
+            animation: drawPath 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+        }
+
+        .anim-ball {
+            opacity: 0;
+            transform-origin: 296px 46px;
+            animation: popBall 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+        }
+
+        .anim-zone {
+            opacity: 0;
+            animation: flashZone 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+        }
+
+        .anim-call-text {
+            opacity: 0;
+            transform: translateY(4px);
+            animation: textPop 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+        }
+
+        @keyframes drawPath {
+
+            0%,
+            10% {
+                stroke-dashoffset: 120;
+                opacity: 1;
+            }
+
+            40% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+
+            80%,
+            100% {
+                stroke-dashoffset: 0;
+                opacity: 0;
+            }
+        }
+
+        @keyframes popBall {
+
+            0%,
+            38% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            42% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+
+            46%,
+            75% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            80%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes flashZone {
+
+            0%,
+            38% {
+                opacity: 0;
+            }
+
+            42%,
+            75% {
+                opacity: 1;
+            }
+
+            80%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes textPop {
+
+            0%,
+            42% {
+                opacity: 0;
+                transform: translateY(4px);
+            }
+
+            46%,
+            75% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            80%,
+            100% {
+                opacity: 0;
+                transform: translateY(4px);
+            }
+        }
 
         /* Call result */
         .call-result {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 8px;
             padding: 16px 20px;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
+
         .call-word {
             font-family: 'DM Serif Display', serif;
-            font-size: 40px;
+            font-size: 42px;
             font-weight: 400;
             color: #F87171;
             letter-spacing: 0.02em;
             line-height: 1;
         }
-        .call-word.in { color: #22C55E; }
-        .call-meta { text-align: right; }
-        .call-conf { font-size: 22px; font-weight: 700; color: rgba(255,255,255,0.85); line-height: 1; }
-        .call-conf-label { font-size: 10px; color: rgba(255,255,255,0.35); margin-top: 2px; letter-spacing: 0.06em; }
+
+        .call-meta {
+            text-align: right;
+        }
+
+        .call-conf {
+            font-size: 24px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1;
+        }
+
+        .call-conf-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 4px;
+            letter-spacing: 0.06em;
+        }
 
         .call-timing {
             display: flex;
             justify-content: space-between;
             font-size: 11px;
-            color: rgba(255,255,255,0.35);
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.4);
             letter-spacing: 0.05em;
         }
-        .call-timing span:last-child { color: #22C55E; }
+
+        .call-timing span:last-child {
+            color: #22C55E;
+        }
 
         /* ─── Credibility bar ─── */
         .cred-bar {
-            text-align: center; padding: 18px 32px;
-            font-size: 12px; color: var(--muted);
-            border-bottom: 1px solid var(--rule); background: var(--surface);
-            letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center;
-            flex-wrap: wrap; gap: 8px 24px;
+            text-align: center;
+            padding: 20px 32px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--muted);
+            border-bottom: 1px solid var(--rule);
+            background: var(--surface);
+            letter-spacing: 0.04em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px 32px;
             transition: background 0.4s ease, border-color 0.3s ease;
         }
-        .cred-dot { opacity: 0.3; }
+
+        .cred-dot {
+            opacity: 0.3;
+        }
 
         /* ─── Pillars ─── */
-        .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
 
         .pillar-card {
             background: var(--surface);
-            padding: 36px 28px;
+            padding: 40px 32px;
             border-top: 2px solid var(--accent);
-            border-radius: 4px;
-            display: flex; flex-direction: column; gap: 16px;
-            transition: transform 0.2s ease, background 0.4s ease, border-color 0.4s ease;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            border: 1px solid transparent;
+            border-top: 2px solid var(--accent);
         }
-        .pillar-card:hover { transform: translateY(-4px); }
-        .pillar-icon { color: var(--accent); transition: color 0.4s ease; }
-        .pillar-title { font-family: 'DM Sans', sans-serif; font-size: 20px; font-weight: 700; color: var(--text); margin: 0; transition: color 0.3s ease; }
-        .pillar-desc { font-size: 15px; color: var(--muted); line-height: 1.65; margin: 0; transition: color 0.3s ease; }
+
+        .pillar-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.04);
+            border-color: var(--rule);
+            border-top-color: var(--accent);
+        }
+
+        [data-theme="dark"] .pillar-card:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .pillar-icon {
+            color: var(--accent);
+            transition: color 0.4s ease;
+            margin-bottom: 8px;
+        }
+
+        .pillar-title {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            margin: 0;
+            transition: color 0.3s ease;
+        }
+
+        .pillar-desc {
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.7;
+            margin: 0;
+            transition: color 0.3s ease;
+        }
 
         /* ─── Demo ─── */
-        .demo-video-wrap { margin-top: 40px; position: relative; aspect-ratio: 16/9; overflow: hidden; background: #111E35; border-radius: 8px; }
-        .demo-caption { margin-top: 16px; text-align: center; font-size: 13px; color: var(--muted); transition: color 0.3s ease; }
+        .demo-video-wrap {
+            margin-top: 48px;
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            background: #111E35;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] .demo-video-wrap {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .demo-caption {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--muted);
+            transition: color 0.3s ease;
+        }
 
         /* ─── Steps ─── */
-        .steps-list { margin-top: 56px; }
+        .steps-list {
+            margin-top: 64px;
+        }
+
         .step-row {
-            display: flex; align-items: flex-start; justify-content: space-between;
-            padding: 32px 0; border-bottom: 1px solid var(--rule); gap: 24px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 36px 0;
+            border-bottom: 1px solid var(--rule);
+            gap: 32px;
             transition: border-color 0.3s ease;
         }
-        .step-row:first-child { border-top: 1px solid var(--rule); }
-        .step-num { font-family: 'DM Sans', sans-serif; font-size: 48px; font-weight: 700; color: var(--rule); min-width: 64px; line-height: 1; user-select: none; padding-top: 2px; transition: color 0.3s ease; }
-        .step-body { flex: 1; }
-        .step-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 4px; transition: color 0.3s ease; }
-        .step-desc { font-size: 15px; color: var(--muted); line-height: 1.75; transition: color 0.3s ease; }
-        .step-tag { font-size: 11px; color: #6B84A8; border: 1px solid var(--rule); padding: 4px 12px; border-radius: 2px; white-space: nowrap; letter-spacing: 0.04em; transition: border-color 0.3s ease; }
+
+        .step-row:first-child {
+            border-top: 1px solid var(--rule);
+        }
+
+        .step-num {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--rule);
+            min-width: 64px;
+            line-height: 1;
+            user-select: none;
+            padding-top: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .step-body {
+            flex: 1;
+        }
+
+        .step-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .step-desc {
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.75;
+            transition: color 0.3s ease;
+            max-width: 480px;
+        }
+
+        .step-tag {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent);
+            border: 1px solid var(--rule);
+            padding: 6px 14px;
+            border-radius: 100px;
+            white-space: nowrap;
+            letter-spacing: 0.04em;
+            transition: all 0.3s ease;
+        }
+
+        .step-row:hover .step-tag {
+            border-color: var(--accent);
+            background: var(--accent-glow);
+        }
 
         /* ─── Features table ─── */
-        .feat-table { margin-top: 56px; }
-        .feat-row { display: grid; grid-template-columns: 1fr 1.6fr; gap: 40px; align-items: start; padding: 28px 0; border-bottom: 1px solid var(--rule); transition: border-color 0.3s ease; }
-        .feat-row:first-child { border-top: 1px solid var(--rule); }
-        .feat-name { font-size: 15px; font-weight: 500; color: var(--text); padding-top: 2px; transition: color 0.3s ease; }
-        .feat-desc { font-size: 15px; color: var(--muted); line-height: 1.75; transition: color 0.3s ease; }
+        .feat-table {
+            margin-top: 64px;
+        }
+
+        .feat-row {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 48px;
+            align-items: start;
+            padding: 32px 0;
+            border-bottom: 1px solid var(--rule);
+            transition: border-color 0.3s ease;
+        }
+
+        .feat-row:first-child {
+            border-top: 1px solid var(--rule);
+        }
+
+        .feat-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text);
+            padding-top: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .feat-desc {
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.75;
+            transition: color 0.3s ease;
+        }
 
         /* ─── Surface sections ─── */
-        .section-surface { background: var(--surface); transition: background 0.4s ease; }
+        .section-surface {
+            background: var(--surface);
+            transition: background 0.4s ease;
+        }
 
         /* ─── Revenue ─── */
-        .revenue-split { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; margin-top: 48px; align-items: start; }
-        .revenue-table { border-top: 1px solid var(--rule); transition: border-color 0.3s ease; }
-        .revenue-row { display: flex; justify-content: space-between; align-items: baseline; padding: 20px 0; border-bottom: 1px solid var(--rule); transition: border-color 0.3s ease; }
-        .revenue-label { font-size: 15px; color: var(--muted); transition: color 0.3s ease; }
-        .revenue-value { font-size: 16px; font-weight: 700; color: var(--text); transition: color 0.3s ease; }
-        .revenue-note { margin-top: 20px; font-size: 14px; color: var(--muted); line-height: 1.75; transition: color 0.3s ease; }
+        .revenue-split {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 64px;
+            margin-top: 56px;
+            align-items: center;
+        }
+
+        .revenue-table {
+            border-top: 1px solid var(--rule);
+            transition: border-color 0.3s ease;
+        }
+
+        .revenue-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--rule);
+            transition: border-color 0.3s ease;
+        }
+
+        .revenue-label {
+            font-size: 16px;
+            color: var(--muted);
+            transition: color 0.3s ease;
+        }
+
+        .revenue-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text);
+            transition: color 0.3s ease;
+        }
+
+        .revenue-note {
+            margin-top: 24px;
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.75;
+            transition: color 0.3s ease;
+        }
 
         /* ─── Stats ─── */
-        .stats-split { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; margin-top: 48px; align-items: center; }
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
-        .stat-num { font-family: 'DM Serif Display', serif; font-size: 48px; color: var(--stat-num); line-height: 1.1; transition: color 0.4s ease; }
-        .stat-label { font-size: 14px; color: var(--muted); margin-top: 6px; max-width: 150px; line-height: 1.5; transition: color 0.3s ease; }
-        .stat-source { font-size: 11px; color: var(--muted); opacity: 0.5; letter-spacing: 0.04em; margin-top: 24px; line-height: 1.6; }
+        .stats-split {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 56px;
+            margin-top: 56px;
+            align-items: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .stat-num {
+            font-family: 'DM Serif Display', serif;
+            font-size: 56px;
+            color: var(--stat-num);
+            line-height: 1.1;
+            transition: color 0.4s ease;
+        }
+
+        .stat-label {
+            font-size: 15px;
+            color: var(--muted);
+            margin-top: 8px;
+            max-width: 160px;
+            line-height: 1.5;
+            transition: color 0.3s ease;
+        }
+
+        .stat-source {
+            font-size: 12px;
+            color: var(--muted);
+            opacity: 0.6;
+            letter-spacing: 0.04em;
+            margin-top: 32px;
+            line-height: 1.6;
+        }
 
         /* ─── Pilot callout ─── */
-        .pilot-callout { padding: 40px 32px; border: 1px solid rgba(180,83,9,0.2); border-radius: 6px; text-align: center; background: var(--bg); transition: background 0.4s ease, border-color 0.3s ease; }
-        [data-theme="dark"] .pilot-callout { border-color: rgba(34,197,94,0.2); background: var(--surface); }
-        .pilot-badge { display: inline-block; background: rgba(180,83,9,0.08); border: 1px solid rgba(180,83,9,0.25); color: #B45309; font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 100px; margin-bottom: 24px; letter-spacing: 0.05em; text-transform: uppercase; }
-        [data-theme="dark"] .pilot-badge { background: rgba(34,197,94,0.08); border-color: rgba(34,197,94,0.25); color: #22C55E; }
+        .pilot-callout {
+            padding: 48px 40px;
+            border: 1px solid rgba(180, 83, 9, 0.2);
+            border-radius: 8px;
+            text-align: center;
+            background: var(--bg);
+            transition: background 0.4s ease, border-color 0.3s ease;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.02);
+        }
+
+        [data-theme="dark"] .pilot-callout {
+            border-color: rgba(34, 197, 94, 0.2);
+            background: var(--surface);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .pilot-badge {
+            display: inline-block;
+            background: rgba(180, 83, 9, 0.08);
+            border: 1px solid rgba(180, 83, 9, 0.25);
+            color: #B45309;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 6px 16px;
+            border-radius: 100px;
+            margin-bottom: 24px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        [data-theme="dark"] .pilot-badge {
+            background: rgba(34, 197, 94, 0.08);
+            border-color: rgba(34, 197, 94, 0.25);
+            color: #22C55E;
+        }
 
         /* ─── Terms table ─── */
-        .terms-table { border-top: 1px solid var(--rule); max-width: 600px; }
-        .terms-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 24px 0; border-bottom: 1px solid var(--rule); gap: 24px; transition: border-color 0.3s ease; }
-        .terms-label { font-size: 15px; font-weight: 600; color: var(--text); min-width: 180px; transition: color 0.3s ease; }
-        .terms-value { font-size: 15px; color: var(--muted); line-height: 1.65; transition: color 0.3s ease; }
+        .terms-table {
+            border-top: 1px solid var(--rule);
+            max-width: 680px;
+        }
+
+        .terms-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 28px 0;
+            border-bottom: 1px solid var(--rule);
+            gap: 32px;
+            transition: border-color 0.3s ease;
+        }
+
+        .terms-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text);
+            min-width: 200px;
+            transition: color 0.3s ease;
+        }
+
+        .terms-value {
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.7;
+            transition: color 0.3s ease;
+        }
 
         /* ─── Contact ─── */
-        .contact-block { margin-top: 48px; }
-        .contact-row { display: flex; align-items: center; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--rule); transition: border-color 0.3s ease; }
-        .contact-row:first-child { border-top: 1px solid var(--rule); }
-        .contact-label { font-size: 12px; color: #6B84A8; letter-spacing: 0.08em; text-transform: uppercase; min-width: 80px; }
-        .contact-value { font-size: 15px; color: var(--text); transition: color 0.3s ease; }
-        .contact-value a { color: var(--accent); text-decoration: none; transition: opacity 0.2s, color 0.4s ease; }
-        .contact-value a:hover { opacity: 0.75; }
+        .contact-block {
+            margin-top: 56px;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--rule);
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-row:first-child {
+            border-top: 1px solid var(--rule);
+        }
+
+        .contact-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            min-width: 100px;
+        }
+
+        .contact-value {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text);
+            transition: color 0.3s ease;
+        }
+
+        .contact-value a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: opacity 0.2s, color 0.4s ease;
+        }
+
+        .contact-value a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
 
         /* ─── Footer ─── */
-        footer { padding: 64px 32px; border-top: 1px solid var(--rule); transition: border-color 0.3s ease; }
-        .footer-inner { max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: 1.8fr 1fr 1fr; gap: 48px; }
-        .footer-logo { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; color: var(--text); text-decoration: none; display: block; margin-bottom: 12px; transition: color 0.3s ease; }
-        .footer-tagline { font-size: 13px; color: var(--muted); line-height: 1.75; max-width: 240px; transition: color 0.3s ease; }
-        .footer-col h4 { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #6B84A8; margin-bottom: 20px; }
-        .footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
-        .footer-col a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-        .footer-col a:hover { color: var(--text); }
-        .footer-bottom { max-width: 1200px; margin: 48px auto 0; padding-top: 24px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; transition: border-color 0.3s ease; }
-        .footer-bottom p, .footer-bottom a { font-size: 12px; color: #6B84A8; }
-        .footer-bottom a { text-decoration: none; transition: color 0.2s; }
-        .footer-bottom a:hover { color: var(--muted); }
-        .footer-legal { display: flex; gap: 24px; }
+        footer {
+            padding: 80px 32px;
+            border-top: 1px solid var(--rule);
+            transition: border-color 0.3s ease;
+        }
+
+        .footer-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 56px;
+        }
+
+        .footer-logo {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: var(--text);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-tagline {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.75;
+            max-width: 280px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col h4 {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 24px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .footer-col a {
+            font-size: 14px;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: var(--text);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 64px auto 0;
+            padding-top: 32px;
+            border-top: 1px solid var(--rule);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: border-color 0.3s ease;
+        }
+
+        .footer-bottom p,
+        .footer-bottom a {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .footer-bottom a {
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-bottom a:hover {
+            color: var(--text);
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 32px;
+        }
 
         /* ─── Responsive ─── */
         @media (max-width: 960px) {
-            .footer-inner { grid-template-columns: 1fr 1fr; gap: 40px; }
-            .pillars-grid { grid-template-columns: 1fr; }
-            #hero { grid-template-columns: 1fr; min-height: auto; }
-            .hero-left { padding: 100px 32px 48px; }
-            .hero-right { min-height: 480px; }
+            .footer-inner {
+                grid-template-columns: 1fr 1fr;
+                gap: 48px;
+            }
+
+            .pillars-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #hero {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+
+            .hero-left {
+                padding: 120px 32px 64px;
+            }
+
+            .hero-right {
+                min-height: 520px;
+            }
         }
+
         @media (max-width: 768px) {
-            section { padding: 80px 20px; }
-            .nav-inner { padding: 0 20px; }
-            .nav-links, .nav-actions { display: none; }
-            #mobile-btn { display: block; }
-            .hero-left { padding: 88px 20px 48px; }
-            .hero-h1 { font-size: 38px; }
-            .hero-stats { flex-wrap: wrap; gap: 20px; }
-            .hero-right { min-height: 360px; padding: 40px 24px; }
-            .step-row { flex-wrap: wrap; }
-            .feat-row { grid-template-columns: 1fr; gap: 6px; }
-            .stats-split { grid-template-columns: 1fr; gap: 40px; }
-            .revenue-split { grid-template-columns: 1fr; gap: 40px; }
-            footer { padding: 48px 20px; }
-            .footer-inner { grid-template-columns: 1fr; gap: 32px; }
-            .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+            section {
+                padding: 80px 24px;
+            }
+
+            .nav-inner {
+                padding: 0 24px;
+            }
+
+            .nav-links,
+            .nav-actions {
+                display: none;
+            }
+
+            #mobile-btn {
+                display: block;
+            }
+
+            .hero-left {
+                padding: 104px 24px 48px;
+            }
+
+            .hero-h1 {
+                font-size: 42px;
+            }
+
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: 24px;
+            }
+
+            .hero-right {
+                min-height: 400px;
+                padding: 48px 24px;
+            }
+
+            .step-row {
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+
+            .feat-row {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .stats-split {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .revenue-split {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            footer {
+                padding: 56px 24px;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .court-display {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
@@ -462,11 +1312,12 @@
                 </button>
                 <a href="#pricing" class="btn-primary">Apply for pilot</a>
             </div>
-            <button id="mobile-btn" type="button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">
-                <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-                    <rect y="4" width="22" height="1.5" fill="currentColor"/>
-                    <rect y="10" width="22" height="1.5" fill="currentColor"/>
-                    <rect y="16" width="22" height="1.5" fill="currentColor"/>
+            <button id="mobile-btn" type="button" aria-label="Open menu" aria-controls="mobile-menu"
+                aria-expanded="false">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect x="2" y="5" width="20" height="2" fill="currentColor" />
+                    <rect x="2" y="11" width="20" height="2" fill="currentColor" />
+                    <rect x="2" y="17" width="20" height="2" fill="currentColor" />
                 </svg>
             </button>
         </div>
@@ -475,8 +1326,8 @@
     <!-- ─── MOBILE MENU ─── -->
     <div id="mobile-menu" aria-hidden="true">
         <button id="mobile-close" type="button" aria-label="Close menu">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
             </svg>
         </button>
         <a href="#pillars" class="mobile-link">Features</a>
@@ -494,7 +1345,9 @@
         <div class="hero-left reveal">
             <div class="section-label">Smart Court AI</div>
             <h1 class="hero-h1">Your court's AI.<br>Umpire. Coach.<br><span class="accent">Creator.</span></h1>
-            <p class="hero-sub">InBound Vision installs an AI system on your pickleball court that calls every line, tracks every player, and turns every match into content — automatically. Zero upfront cost. <strong style="color:var(--accent);">₹90,000</strong> more per year.</p>
+            <p class="hero-sub">InBound Vision installs an AI system on your pickleball court that calls every line,
+                tracks every player, and turns every match into content — automatically. Zero upfront cost. <strong
+                    style="color:var(--accent);">₹90,000</strong> more per year.</p>
             <div class="hero-actions">
                 <a href="#pricing" class="btn-primary">Apply for pilot</a>
                 <a href="#pillars" class="btn-ghost">See the three features ↓</a>
@@ -527,31 +1380,40 @@
                 <!-- Court diagram SVG -->
                 <svg class="court-svg" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <!-- Court outline -->
-                    <rect x="10" y="10" width="300" height="140" rx="2" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+                    <rect x="10" y="10" width="300" height="140" rx="2" stroke="rgba(255,255,255,0.25)"
+                        stroke-width="1.5" />
                     <!-- Kitchen lines (NVZ) -->
-                    <line x1="10" y1="50" x2="130" y2="50" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-                    <line x1="190" y1="50" x2="310" y2="50" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-                    <line x1="10" y1="110" x2="130" y2="110" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-                    <line x1="190" y1="110" x2="310" y2="110" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                    <line x1="10" y1="50" x2="130" y2="50" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+                    <line x1="190" y1="50" x2="310" y2="50" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+                    <line x1="10" y1="110" x2="130" y2="110" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+                    <line x1="190" y1="110" x2="310" y2="110" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
                     <!-- Centre line -->
-                    <line x1="160" y1="10" x2="160" y2="150" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="4 4"/>
+                    <line x1="160" y1="10" x2="160" y2="150" stroke="rgba(255,255,255,0.2)" stroke-width="1"
+                        stroke-dasharray="4 4" />
                     <!-- Net -->
-                    <line x1="10" y1="80" x2="310" y2="80" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-                    <!-- Ball position — out -->
-                    <circle cx="296" cy="46" r="7" fill="#F87171" opacity="0.9"/>
-                    <circle cx="296" cy="46" r="12" stroke="#F87171" stroke-width="1" opacity="0.3"/>
-                    <!-- Bounce marker -->
-                    <ellipse cx="296" cy="50" rx="8" ry="3" fill="rgba(248,113,113,0.25)"/>
-                    <!-- Trajectory line -->
-                    <path d="M200 110 Q248 40 296 46" stroke="rgba(248,113,113,0.4)" stroke-width="1.5" stroke-dasharray="5 3" fill="none"/>
-                    <!-- Out zone highlight -->
-                    <rect x="286" y="36" width="24" height="14" rx="2" fill="rgba(248,113,113,0.08)" stroke="rgba(248,113,113,0.3)" stroke-width="1"/>
+                    <line x1="10" y1="80" x2="310" y2="80" stroke="rgba(255,255,255,0.6)" stroke-width="2" />
+
+                    <!-- Trajectory line (Animated) -->
+                    <path class="anim-trajectory" d="M190 120 Q240 30 296 46" stroke="rgba(248,113,113,0.5)"
+                        stroke-width="2" stroke-dasharray="5 4" fill="none" stroke-linecap="round" />
+
+                    <!-- Out zone highlight (Animated) -->
+                    <rect class="anim-zone" x="286" y="36" width="24" height="14" rx="2" fill="rgba(248,113,113,0.12)"
+                        stroke="rgba(248,113,113,0.4)" stroke-width="1" />
+
+                    <!-- Ball position — out (Animated) -->
+                    <g class="anim-ball">
+                        <!-- Bounce marker -->
+                        <ellipse cx="296" cy="50" rx="9" ry="3.5" fill="rgba(248,113,113,0.3)" />
+                        <circle cx="296" cy="46" r="14" stroke="#F87171" stroke-width="1" opacity="0.3" />
+                        <circle cx="296" cy="46" r="7" fill="#F87171" opacity="1" />
+                    </g>
                 </svg>
 
                 <!-- Call result -->
                 <div class="call-result">
-                    <div class="call-word">OUT</div>
-                    <div class="call-meta">
+                    <div class="call-word anim-call-text">OUT</div>
+                    <div class="call-meta anim-call-text">
                         <div class="call-conf">98.4%</div>
                         <div class="call-conf-label">CONFIDENCE</div>
                     </div>
@@ -580,29 +1442,45 @@
         <div class="container-narrow">
             <div class="reveal">
                 <div class="section-label">What InBound Vision does</div>
-                <h2 style="font-size:clamp(32px,4vw,44px);">One install. Three superpowers.</h2>
+                <h2 style="font-size:clamp(36px,4vw,48px);">One install. Three superpowers.</h2>
             </div>
             <div class="pillars-grid reveal reveal-delay-1">
                 <div class="pillar-card">
                     <div class="pillar-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>
                     </div>
                     <h3 class="pillar-title">The Umpire</h3>
-                    <p class="pillar-desc">Real-time In/Out line calls at 80 FPS. Live scoring on a courtside display. Zero disputes, zero arguments — ever.</p>
+                    <p class="pillar-desc">Real-time In/Out line calls at 80 FPS. Live scoring on a courtside display.
+                        Zero disputes, zero arguments — ever.</p>
                 </div>
                 <div class="pillar-card">
                     <div class="pillar-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="20" x2="12" y2="10" />
+                            <line x1="18" y1="20" x2="18" y2="4" />
+                            <line x1="6" y1="20" x2="6" y2="16" />
+                        </svg>
                     </div>
                     <h3 class="pillar-title">The Coach</h3>
-                    <p class="pillar-desc">Post-match analytics for every player. Shot patterns, rally stats, performance trends — delivered automatically after every game.</p>
+                    <p class="pillar-desc">Post-match analytics for every player. Shot patterns, rally stats,
+                        performance trends — delivered automatically after every game.</p>
                 </div>
                 <div class="pillar-card">
                     <div class="pillar-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="23 7 16 12 23 17 23 7" />
+                            <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+                        </svg>
                     </div>
                     <h3 class="pillar-title">The Creator</h3>
-                    <p class="pillar-desc">Auto-generated 60-second highlight reels after every match. Share directly to Instagram, WhatsApp, or stream live to your audience.</p>
+                    <p class="pillar-desc">Auto-generated 60-second highlight reels after every match. Share directly to
+                        Instagram, WhatsApp, or stream live.</p>
                 </div>
             </div>
         </div>
@@ -613,26 +1491,32 @@
         <div class="container-narrow">
             <div class="reveal">
                 <div class="section-label">See It Live</div>
-                <h2 style="font-size:clamp(32px,4vw,44px);">Watch the system make a call.</h2>
+                <h2 style="font-size:clamp(36px,4vw,48px);">Watch the system make a call.</h2>
             </div>
             <div class="reveal reveal-delay-1">
                 <div class="demo-video-wrap">
-                    <video id="demo-vid" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block;">
+                    <video id="demo-vid" autoplay muted loop playsinline
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
                         <source src="output_compressed.mp4" type="video/mp4">
                     </video>
-                    <div id="video-fallback" style="display:none;position:absolute;inset:0;background:#111E35;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:48px 24px;">
+                    <div id="video-fallback"
+                        style="display:none;position:absolute;inset:0;background:#111E35;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:48px 24px;">
                         <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
-                            <circle cx="36" cy="36" r="35" stroke="rgba(250,248,244,0.15)" stroke-width="1.5"/>
-                            <polygon points="30,24 52,36 30,48" fill="rgba(250,248,244,0.4)"/>
+                            <circle cx="36" cy="36" r="35" stroke="rgba(250,248,244,0.15)" stroke-width="1.5" />
+                            <polygon points="30,24 52,36 30,48" fill="rgba(250,248,244,0.4)" />
                         </svg>
                         <div style="text-align:center;">
-                            <div style="font-size:16px;color:rgba(250,248,244,0.6);margin-bottom:8px;">Demo video coming soon</div>
-                            <div style="font-size:13px;color:rgba(250,248,244,0.35);max-width:340px;line-height:1.6;">Live system demo available on request — contact <a href="mailto:hello@inboundvision.com" style="color:#22C55E;text-decoration:none;">hello@inboundvision.com</a></div>
+                            <div style="font-size:16px;color:rgba(250,248,244,0.6);margin-bottom:8px;">Demo video coming
+                                soon</div>
+                            <div style="font-size:13px;color:rgba(250,248,244,0.35);max-width:340px;line-height:1.6;">
+                                Live system demo available on request — contact <a href="mailto:hello@inboundvision.com"
+                                    style="color:#22C55E;text-decoration:none;">hello@inboundvision.com</a></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <p class="demo-caption">The system tracks the ball at 80 frames per second and makes the In/Out call in under 15 milliseconds.</p>
+            <p class="demo-caption">The system tracks the ball at 80 frames per second and makes the In/Out call in
+                under 15 milliseconds.</p>
         </div>
     </section>
 
@@ -641,14 +1525,15 @@
         <div class="container-narrow">
             <div class="reveal">
                 <div class="section-label">How It Works</div>
-                <h2 style="font-size:clamp(32px,4vw,44px);">Set up once. Runs forever.</h2>
+                <h2 style="font-size:clamp(36px,4vw,48px);">Set up once. Runs forever.</h2>
             </div>
             <div class="steps-list reveal reveal-delay-1">
                 <div class="step-row">
                     <div class="step-num">01</div>
                     <div class="step-body">
                         <div class="step-title">We install the system</div>
-                        <div class="step-desc">Our team mounts two cameras and an edge AI unit on your court. Takes under one hour — zero disruption to your schedule.</div>
+                        <div class="step-desc">Our team mounts two cameras and an edge AI unit on your court. Takes
+                            under one hour — zero disruption to your schedule.</div>
                     </div>
                     <div class="step-tag">Zero effort</div>
                 </div>
@@ -656,7 +1541,8 @@
                     <div class="step-num">02</div>
                     <div class="step-body">
                         <div class="step-title">It runs automatically</div>
-                        <div class="step-desc">The system tracks every ball in real time at 80 frames per second. No internet required. No ongoing management from you.</div>
+                        <div class="step-desc">The system tracks every ball in real time at 80 frames per second. No
+                            internet required. No ongoing management from you.</div>
                     </div>
                     <div class="step-tag">Always on</div>
                 </div>
@@ -664,7 +1550,8 @@
                     <div class="step-num">03</div>
                     <div class="step-body">
                         <div class="step-title">Players get instant calls</div>
-                        <div class="step-desc">In/Out decisions appear on screen in milliseconds. No disputes, no arguments — just play.</div>
+                        <div class="step-desc">In/Out decisions appear on screen in milliseconds. No disputes, no
+                            arguments — just play.</div>
                     </div>
                     <div class="step-tag">Dispute-free</div>
                 </div>
@@ -672,7 +1559,8 @@
                     <div class="step-num">04</div>
                     <div class="step-body">
                         <div class="step-title">You collect the upside</div>
-                        <div class="step-desc">Charge a Smart Court premium on every booking. We handle all hardware, maintenance, and software updates.</div>
+                        <div class="step-desc">Charge a Smart Court premium on every booking. We handle all hardware,
+                            maintenance, and software updates.</div>
                     </div>
                     <div class="step-tag">Day one revenue</div>
                 </div>
@@ -685,20 +1573,23 @@
         <div class="container-narrow">
             <div class="reveal">
                 <div class="section-label">The Technology</div>
-                <h2 style="font-size:clamp(32px,4vw,44px);">Edge AI. No cloud. No lag.</h2>
+                <h2 style="font-size:clamp(36px,4vw,48px);">Edge AI. No cloud. No lag.</h2>
             </div>
             <div class="feat-table reveal reveal-delay-1">
                 <div class="feat-row">
                     <div class="feat-name">Edge AI at 80 frames per second</div>
-                    <div class="feat-desc">All processing happens locally on an NVIDIA Jetson device. No cloud, no lag, no Wi-Fi dependency. Every line call is made in under 15 milliseconds.</div>
+                    <div class="feat-desc">All processing happens locally on an NVIDIA Jetson device. No cloud, no lag,
+                        no Wi-Fi dependency. Every line call is made in under 15 milliseconds.</div>
                 </div>
                 <div class="feat-row">
-                    <div class="feat-name">Player tracking and analytics engine</div>
-                    <div class="feat-desc">Beyond the ball — the system tracks player positions, rally lengths, and shot placement to build a post-match performance picture for every player.</div>
+                    <div class="feat-name">Player tracking &amp; analytics</div>
+                    <div class="feat-desc">Beyond the ball — the system tracks player positions, rally lengths, and shot
+                        placement to build a post-match performance picture for every player.</div>
                 </div>
                 <div class="feat-row">
-                    <div class="feat-name">Automatic highlight generation</div>
-                    <div class="feat-desc">The system identifies key moments — winners, long rallies, close calls — and stitches them into a shareable reel automatically. No editing required.</div>
+                    <div class="feat-name">Automatic highlights</div>
+                    <div class="feat-desc">The system identifies key moments — winners, long rallies, close calls — and
+                        stitches them into a shareable reel automatically. No editing required.</div>
                 </div>
             </div>
         </div>
@@ -709,7 +1600,7 @@
         <div class="container-narrow">
             <div class="reveal">
                 <div class="section-label">Player Demand</div>
-                <h2 style="font-size:clamp(32px,4vw,44px);">Players are already asking for this.</h2>
+                <h2 style="font-size:clamp(36px,4vw,48px);">Players are asking for this.</h2>
             </div>
             <div class="stats-split reveal reveal-delay-1">
                 <div>
@@ -735,9 +1626,15 @@
                 </div>
                 <div class="pilot-callout">
                     <div class="pilot-badge">10 courts only</div>
-                    <div style="font-size:20px;font-weight:700;color:var(--text);margin-bottom:12px;line-height:1.3;transition:color 0.3s ease;">Pilot spots are limited</div>
-                    <p style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:28px;transition:color 0.3s ease;">We're selecting pilot partners who want to be first to offer a Smart Court experience in Hyderabad and Bangalore.</p>
-                    <a href="#pricing" class="btn-primary" style="font-size:15px;padding:14px 24px;display:block;text-align:center;">Apply for pilot</a>
+                    <div
+                        style="font-size:22px;font-weight:700;color:var(--text);margin-bottom:16px;line-height:1.3;transition:color 0.3s ease;">
+                        Pilot spots are limited</div>
+                    <p
+                        style="font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:32px;transition:color 0.3s ease;">
+                        We're selecting pilot partners who want to be first to offer a Smart Court experience in
+                        Hyderabad and Bangalore.</p>
+                    <a href="#pricing" class="btn-primary"
+                        style="font-size:15px;padding:14px 24px;display:block;text-align:center;">Apply for pilot</a>
                 </div>
             </div>
         </div>
@@ -746,10 +1643,13 @@
     <!-- ─── PILOT PROGRAM ─── -->
     <section id="pricing" class="section-surface">
         <div class="container-narrow">
-            <div class="reveal" style="margin-bottom:48px;">
+            <div class="reveal" style="margin-bottom:56px;">
                 <div class="section-label">Pilot Program</div>
-                <h2 style="font-size:clamp(32px,4vw,44px);">Join the Smart Court pilot.</h2>
-                <p style="font-size:16px;color:var(--muted);margin-top:16px;line-height:1.75;transition:color 0.3s ease;">We're selecting 10 partner courts in Hyderabad and Bangalore to be the first to offer the Smart Court experience.</p>
+                <h2 style="font-size:clamp(36px,4vw,48px);">Join the Smart Court pilot.</h2>
+                <p
+                    style="font-size:17px;color:var(--muted);margin-top:20px;line-height:1.75;transition:color 0.3s ease;">
+                    We're selecting 10 partner courts in Hyderabad and Bangalore to be the first to offer the Smart
+                    Court experience.</p>
             </div>
 
             <div class="revenue-split reveal reveal-delay-1">
@@ -768,32 +1668,45 @@
                             <span class="revenue-value" style="color:#16A34A;">&#x20B9;30 / hr</span>
                         </div>
                     </div>
-                    <p class="revenue-note">At 10 hours/day, 300 days/year — that's <strong>&#x20B9;90,000 additional revenue</strong> per court during the pilot.</p>
+                    <p class="revenue-note">At 10 hours/day, 300 days/year — that's <strong>&#x20B9;90,000 additional
+                            revenue</strong> per court during the pilot.</p>
                 </div>
-                <div style="background:var(--card-bg);color:var(--card-fg);border-radius:8px;padding:40px 32px;text-align:center;transition:background 0.4s ease,color 0.3s ease;">
-                    <div style="font-family:'DM Serif Display',serif;font-size:64px;color:var(--accent);line-height:1;transition:color 0.4s ease;">&#x20B9;0</div>
-                    <div style="font-size:15px;margin-top:12px;font-weight:600;color:var(--card-fg);transition:color 0.3s ease;">Upfront cost to you</div>
-                    <p style="margin-top:24px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);font-size:13px;color:var(--card-label);line-height:1.7;transition:color 0.3s ease;">We supply, install, and maintain all hardware. No hidden fees, no subscription. Just collect the upside.</p>
+                <div
+                    style="background:var(--card-bg);color:var(--card-fg);border-radius:12px;padding:48px 32px;text-align:center;transition:background 0.4s ease,color 0.3s ease;box-shadow:0 12px 32px rgba(0,0,0,0.05);">
+                    <div
+                        style="font-family:'DM Serif Display',serif;font-size:72px;color:var(--accent);line-height:1;transition:color 0.4s ease;">
+                        &#x20B9;0</div>
+                    <div
+                        style="font-size:16px;margin-top:16px;font-weight:700;color:var(--card-fg);transition:color 0.3s ease;">
+                        Upfront cost to you</div>
+                    <p
+                        style="margin-top:32px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.08);font-size:14px;color:var(--card-label);line-height:1.7;transition:color 0.3s ease;">
+                        We supply, install, and maintain all hardware. No hidden fees, no subscription. Just collect the
+                        upside.</p>
                 </div>
             </div>
 
-            <div class="reveal" style="margin-top:64px;">
+            <div class="reveal" style="margin-top:80px;">
                 <div class="terms-table">
                     <div class="terms-row">
                         <span class="terms-label">Support</span>
-                        <span class="terms-value">24/7 technical monitoring and on-site hardware maintenance included.</span>
+                        <span class="terms-value">24/7 technical monitoring and on-site hardware maintenance
+                            included.</span>
                     </div>
                     <div class="terms-row">
                         <span class="terms-label">Duration</span>
-                        <span class="terms-value">3-month initial pilot period with priority for long-term licensing.</span>
+                        <span class="terms-value">3-month initial pilot period with priority for long-term
+                            licensing.</span>
                     </div>
                     <div class="terms-row">
                         <span class="terms-label">Availability</span>
-                        <span class="terms-value">Accepting applications from courts in Hyderabad and Bangalore only.</span>
+                        <span class="terms-value">Accepting applications from courts in Hyderabad and Bangalore
+                            only.</span>
                     </div>
                 </div>
-                <div style="margin-top:40px;text-align:center;">
-                    <a href="mailto:hello@inboundvision.com?subject=Pilot%20Application" class="btn-primary" style="font-size:15px;padding:14px 28px;">Apply for pilot spot</a>
+                <div style="margin-top:56px;text-align:center;">
+                    <a href="mailto:hello@inboundvision.com?subject=Pilot%20Application" class="btn-primary"
+                        style="font-size:15px;padding:16px 32px;">Apply for pilot spot</a>
                 </div>
             </div>
         </div>
@@ -804,14 +1717,18 @@
         <div class="container-narrow">
             <div class="reveal">
                 <div class="section-label">Get in Touch</div>
-                <h2 style="font-size:clamp(32px,4vw,44px);">Interested? Let's talk.</h2>
-                <p style="font-size:16px;color:var(--dim);margin-top:16px;line-height:1.8;max-width:480px;transition:color 0.3s ease;">We're selecting pilot courts now. Reach out directly — we respond within 24 hours and can answer any questions about the system, the terms, or what installation looks like at your venue.</p>
+                <h2 style="font-size:clamp(36px,4vw,48px);">Interested? Let's talk.</h2>
+                <p
+                    style="font-size:17px;color:var(--dim);margin-top:20px;line-height:1.8;max-width:540px;transition:color 0.3s ease;">
+                    We're selecting pilot courts now. Reach out directly — we respond within 24 hours and can answer any
+                    questions about the system, the terms, or what installation looks like at your venue.</p>
             </div>
             <div class="reveal reveal-delay-1">
                 <div class="contact-block">
                     <div class="contact-row">
                         <span class="contact-label">Email</span>
-                        <span class="contact-value"><a href="mailto:hello@inboundvision.com">hello@inboundvision.com</a></span>
+                        <span class="contact-value"><a
+                                href="mailto:hello@inboundvision.com">hello@inboundvision.com</a></span>
                     </div>
                     <div class="contact-row">
                         <span class="contact-label">Based in</span>
@@ -822,8 +1739,9 @@
                         <span class="contact-value">Hyderabad &amp; Bangalore</span>
                     </div>
                 </div>
-                <div style="margin-top:40px;">
-                    <a href="mailto:hello@inboundvision.com?subject=Smart%20Court%20Pilot%20-%20Expression%20of%20Interest" class="btn-primary" style="font-size:15px;padding:14px 28px;">Send us an email →</a>
+                <div style="margin-top:56px;">
+                    <a href="mailto:hello@inboundvision.com?subject=Smart%20Court%20Pilot%20-%20Expression%20of%20Interest"
+                        class="btn-primary" style="font-size:15px;padding:16px 32px;">Send us an email →</a>
                 </div>
             </div>
         </div>
@@ -835,7 +1753,8 @@
             <div>
                 <a href="#hero" class="footer-logo">INBOUND VISION</a>
                 <p class="footer-tagline">The smart court OS for the generation that films everything.</p>
-                <p class="footer-tagline" style="margin-top:10px;font-style:italic;">Built in Hyderabad. Designed for every recreational court in India.</p>
+                <p class="footer-tagline" style="margin-top:12px;font-style:italic;">Built in Hyderabad. Designed for
+                    every recreational court in India.</p>
             </div>
             <div class="footer-col">
                 <h4>Product</h4>
@@ -865,21 +1784,27 @@
         // ─── Theme toggle ───
         const html = document.documentElement;
         const themeBtn = document.getElementById('theme-btn');
-        const themeLabel = themeBtn.querySelector('.theme-label');
-        const themeIcon  = themeBtn.querySelector('.theme-icon');
+        const themeLabel = themeBtn ? themeBtn.querySelector('.theme-label') : null;
+        const themeIcon = themeBtn ? themeBtn.querySelector('.theme-icon') : null;
 
         function applyTheme(theme) {
             html.setAttribute('data-theme', theme);
-            document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#0A0A0A' : '#F4F1EB';
-            themeLabel.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
-            themeIcon.textContent  = theme === 'dark' ? '☀' : '◑';
-            localStorage.setItem('iv-theme', theme);
+            const metaTheme = document.querySelector('meta[name="theme-color"]');
+            if (metaTheme) metaTheme.content = theme === 'dark' ? '#070A07' : '#F4F1EB';
+            if (themeLabel) themeLabel.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
+            if (themeIcon) themeIcon.textContent = theme === 'dark' ? '☀' : '◑';
+            try { localStorage.setItem('iv-theme', theme); } catch (e) { }
         }
-        const saved = localStorage.getItem('iv-theme');
+
+        let saved = null;
+        try { saved = localStorage.getItem('iv-theme'); } catch (e) { }
+
         if (saved) applyTheme(saved);
-        themeBtn.addEventListener('click', () => {
-            applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-        });
+        if (themeBtn) {
+            themeBtn.addEventListener('click', () => {
+                applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+            });
+        }
 
         // ─── Navbar border on scroll ───
         const nav = document.getElementById('nav');
@@ -892,13 +1817,13 @@
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
         // ─── Mobile menu ───
-        const mobileBtn   = document.getElementById('mobile-btn');
+        const mobileBtn = document.getElementById('mobile-btn');
         const mobileClose = document.getElementById('mobile-close');
-        const mobileMenu  = document.getElementById('mobile-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
         const mobileLinks = document.querySelectorAll('.mobile-link');
 
-        function openMenu()  { mobileMenu.classList.add('open');    mobileMenu.setAttribute('aria-hidden','false'); mobileBtn.setAttribute('aria-expanded','true');  document.body.style.overflow='hidden'; mobileClose.focus(); }
-        function closeMenu() { mobileMenu.classList.remove('open'); mobileMenu.setAttribute('aria-hidden','true');  mobileBtn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; mobileBtn.focus(); }
+        function openMenu() { mobileMenu.classList.add('open'); mobileMenu.setAttribute('aria-hidden', 'false'); mobileBtn.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; mobileClose.focus(); }
+        function closeMenu() { mobileMenu.classList.remove('open'); mobileMenu.setAttribute('aria-hidden', 'true'); mobileBtn.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; mobileBtn.focus(); }
 
         mobileBtn.addEventListener('click', openMenu);
         mobileClose.addEventListener('click', closeMenu);
@@ -908,7 +1833,8 @@
         // ─── Video fallback ───
         const vid = document.getElementById('demo-vid');
         const fallback = document.getElementById('video-fallback');
-        if (vid && fallback) { vid.addEventListener('error', () => { vid.style.display='none'; fallback.style.display='flex'; }); }
+        if (vid && fallback) { vid.addEventListener('error', () => { vid.style.display = 'none'; fallback.style.display = 'flex'; }); }
     </script>
 </body>
+
 </html>
